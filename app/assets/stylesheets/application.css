@@ -1,10 +1,87 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
  *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
  *
- * Consider organizing styles into separate files for maintainability.
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ * *= require_tree .
+ * *= require_self
  */
+
+/* Flatpickr Custom Styles */
+.flatpickr-calendar {
+  font-family: inherit;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.flatpickr-day.selected {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.flatpickr-day.selected:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.flatpickr-day.today {
+  border-color: #2563eb;
+}
+
+.flatpickr-day.today:hover {
+  background: #dbeafe;
+}
+
+.flatpickr-time input {
+  color: #374151;
+}
+
+.flatpickr-time input:hover {
+  background: #f3f4f6;
+}
+
+.flatpickr-time input:focus {
+  background: #dbeafe;
+  color: #1f2937;
+}
+
+.flatpickr-current-month {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.flatpickr-monthDropdown-months {
+  color: #1f2937;
+}
+
+.flatpickr-weekday {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.flatpickr-day {
+  color: #374151;
+}
+
+.flatpickr-day:hover {
+  background: #f3f4f6;
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  color: #9ca3af;
+}
+
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover {
+  background: #f3f4f6;
+}

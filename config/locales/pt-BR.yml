@@ -1,0 +1,113 @@
+pt-BR:
+  # Date and time formats
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m"
+      long: "%d de %B de %Y"
+    day_names: [Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado]
+    abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
+    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d/%m %H:%M"
+      long: "%d de %B de %Y às %H:%M"
+    am: "AM"
+    pm: "PM"
+
+  # Number formats
+  number:
+    currency:
+      format:
+        unit: "R$"
+        precision: 2
+        separator: ","
+        delimiter: "."
+        format: "%u %n"
+
+  # Common translations
+  helpers:
+    select:
+      prompt: "Selecione uma opção"
+    submit:
+      create: "Criar %{model}"
+      update: "Atualizar %{model}"
+      submit: "Salvar %{model}"
+
+  # Model names
+  activerecord:
+    models:
+      meeting: "Reunião"
+      meetings: "Reuniões"
+      user: "Usuário"
+      users: "Usuários"
+    attributes:
+      meeting:
+        title: "Título"
+        description: "Descrição"
+        start_datetime: "Data e Hora de Início"
+        end_datetime: "Data e Hora de Término"
+        location: "Local"
+        user_id: "Responsável"
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
+
+  # Common words
+  common:
+    actions: "Ações"
+    edit: "Editar"
+    delete: "Excluir"
+    show: "Visualizar"
+    back: "Voltar"
+    cancel: "Cancelar"
+    save: "Salvar"
+    create: "Criar"
+    update: "Atualizar"
+    new: "Novo"
+    yes: "Sim"
+    no: "Não"
+    confirm: "Confirmar"
+    loading: "Carregando..."
+    error: "Erro"
+    success: "Sucesso"
+    warning: "Aviso"
+    info: "Informação"
+
+  # Navigation
+  navigation:
+    dashboard: "Dashboard"
+    meetings: "Reuniões"
+    users: "Usuários"
+    documents: "Documentos"
+    settings: "Configurações"
+    reports: "Relatórios"
+    help: "Ajuda"
+    profile: "Perfil"
+    logout: "Sair"
+
+  # Messages
+  messages:
+    created: "%{model} criado com sucesso."
+    updated: "%{model} atualizado com sucesso."
+    deleted: "%{model} excluído com sucesso."
+    error: "Ocorreu um erro. Tente novamente."
+    confirm_delete: "Tem certeza que deseja excluir este %{model}?"
+    not_found: "%{model} não encontrado."
+    unauthorized: "Você não tem permissão para realizar esta ação."
+
+  # Placeholders
+  placeholders:
+    meeting:
+      title: "Digite o título da reunião"
+      description: "Descreva o propósito e objetivos da reunião"
+      location: "Local da reunião (presencial ou virtual)"
+      responsible: "Selecione o responsável"
