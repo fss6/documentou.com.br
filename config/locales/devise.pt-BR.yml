@@ -1,0 +1,46 @@
+pt-BR:
+  devise:
+    failure:
+      inactive: "Sua conta está inativa."
+      inactive_account: "Sua conta está inativa."
+      inactive_tenant: "O tenant está inativo."
+      not_found_in_database: "Email ou senha inválidos."
+      timeout: "Sua sessão expirou. Por favor, faça login novamente."
+      unauthenticated: "Você precisa fazer login ou se registrar antes de continuar."
+      unconfirmed: "Você precisa confirmar sua conta antes de continuar."
+    sessions:
+      user:
+        signed_in: "Login realizado com sucesso."
+        signed_out: "Logout realizado com sucesso."
+    registrations:
+      user:
+        signed_up: "Cadastro realizado com sucesso."
+        updated: "Perfil atualizado com sucesso."
+        updated_but_not_signed_in: "Perfil atualizado com sucesso, mas você precisa fazer login novamente."
+    passwords:
+      send_paranoid_instructions: "Se seu email existe em nossa base de dados, você receberá um email com instruções para redefinir sua senha em alguns minutos."
+      send_instructions: "Você receberá um email com instruções para redefinir sua senha em alguns minutos."
+      updated: "Sua senha foi alterada com sucesso. Você está logado."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+    confirmations:
+      send_paranoid_instructions: "Se seu email existe em nossa base de dados, você receberá um email com instruções para confirmar sua conta em alguns minutos."
+      send_instructions: "Você receberá um email com instruções para confirmar sua conta em alguns minutos."
+      confirmed: "Sua conta foi confirmada com sucesso."
+    unlocks:
+      send_paranoid_instructions: "Se sua conta existe, você receberá um email com instruções para desbloquear sua conta em alguns minutos."
+      send_instructions: "Você receberá um email com instruções para desbloquear sua conta em alguns minutos."
+      unlocked: "Sua conta foi desbloqueada com sucesso. Por favor, faça login para continuar."
+    omniauth_callbacks:
+      failure: "Não foi possível autenticá-lo de %{kind} porque \"%{reason}\"."
+      success: "Autenticação bem-sucedida de %{kind}."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de confirmação"
+      reset_password_instructions:
+        subject: "Instruções de redefinição de senha"
+      unlock_instructions:
+        subject: "Instruções de desbloqueio"
+      email_changed:
+        subject: "Email alterado"
+      password_change:
+        subject: "Senha alterada"
