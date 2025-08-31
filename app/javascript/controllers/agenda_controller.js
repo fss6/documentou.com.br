@@ -193,7 +193,7 @@ export default class extends Controller {
           <!-- Left side: Drag handle and number -->
           <div class="flex items-center space-x-3">
             <!-- Drag Handle -->
-            <div class="flex-shrink-0 drag-handle" title="Arrastar para reordenar">
+            <div class="flex-shrink-0 drag-handle cursor-pointer" title="Arrastar para reordenar">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
               </svg>
@@ -209,12 +209,12 @@ export default class extends Controller {
           
           <!-- Right side: Action buttons -->
           <div class="flex space-x-2">
-            <button type="button" class="text-green-600 hover:text-green-700 p-1" data-action="click->agenda#saveItem" title="Salvar item">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+            <button type="button" class="text-green-600 hover:text-green-700 p-1 cursor-pointer" data-action="click->agenda#saveItem" title="Salvar item">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12" />
               </svg>
             </button>
-            <button type="button" class="text-red-500 hover:text-red-700 p-1" data-action="click->agenda#confirmDelete" title="Remover item">
+            <button type="button" class="text-red-500 hover:text-red-700 p-1 cursor-pointer" data-action="click->agenda#confirmDelete" title="Remover item">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
               </svg>
