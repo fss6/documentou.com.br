@@ -21,7 +21,10 @@ class MeetingsController < ApplicationController
 
   # POST /meetings or /meetings.json
   def create
-    @meeting = Meeting.new(meeting_params)
+    # @meeting = Meeting.new(meeting_params)
+    # @meeting.creator = current_user
+    @meeting = current_user.meetings.new(meeting_params)
+    abort @meeting.inspect
 
     respond_to do |format|
       if @meeting.save
