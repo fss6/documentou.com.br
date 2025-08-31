@@ -373,3 +373,31 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+
+/* Wizard Navigation Styles */
+.wizard-step-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.wizard-step-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.wizard-step-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.wizard-step-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* Smooth transitions for wizard steps */
+.wizard-step-button .rounded-full {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.wizard-step-button .text-sm {
+  transition: color 0.2s ease-in-out;
+}
