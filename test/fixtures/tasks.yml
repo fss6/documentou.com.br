@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  owner: one
+  deadline: 2025-08-31
+  meeting: one
+  status: MyString
+
+two:
+  description: MyText
+  owner: two
+  deadline: 2025-08-31
+  meeting: two
+  status: MyString
