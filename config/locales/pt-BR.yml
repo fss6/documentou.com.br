@@ -155,3 +155,10 @@ pt-BR:
       introduction: "Introdução da reunião (opcional)"
       summary: "Resumo da reunião (opcional)"
       closing: "Encerramento da reunião (opcional)"
+
+  # Wizard Steps
+  meetings:
+    wizard:
+      meeting_step: "Reunião"
+      content_step: "Conteúdo"
+      agenda_step: "Pauta"

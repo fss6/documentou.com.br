@@ -1,9 +1,23 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas]
 
+  # TODO add paginação com Pagy
   # GET /meetings or /meetings.json
   def index
-    @meetings = Meeting.all
+    # TODO: apenas do usuário logado
+    @meetings = current_user.meetings
+    
+    # Busca por título, descrição ou localização
+    if params[:search].present?
+      search_term = "%#{params[:search].downcase}%"
+      @meetings = @meetings.where(
+        "LOWER(title) LIKE ? OR LOWER(description) LIKE ? OR LOWER(location) LIKE ?",
+        search_term, search_term, search_term
+      )
+    end
+    
+    # Ordenação
+    @meetings = @meetings.order(created_at: :desc)
   end
 
   # GET /meetings/1 or /meetings/1.json
@@ -13,6 +27,7 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   def new
     @meeting = Meeting.new
+    @step = 'meeting'
   end
 
   # GET /meetings/1/edit
@@ -29,6 +44,7 @@ class MeetingsController < ApplicationController
   # POST /meetings or /meetings.json
   def create
     @meeting = current_user.meetings.new(meeting_params)
+    @step = params[:step] || 'meeting'
     
     respond_to do |format|
       if @meeting.save
@@ -108,13 +124,13 @@ class MeetingsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_meeting
-    @meeting = Meeting.find(params.expect(:id))
+    @meeting = Meeting.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def meeting_params
     params.require(:meeting).permit(
-      :title, :description, :start_datetime, :end_datetime, :location, :creator_id,
+      :title, :description, :start_datetime, :end_datetime, :location,
       content_attributes: [:introduction, :summary, :closing],
       agendas_attributes: [:id, :title, :description, :position, :_destroy]
     )

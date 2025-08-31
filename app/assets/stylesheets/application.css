@@ -401,3 +401,47 @@
 .wizard-step-button .text-sm {
   transition: color 0.2s ease-in-out;
 }
+
+/* Table Styles */
+.meetings-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.meetings-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #f9fafb;
+}
+
+.meetings-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Search input focus styles */
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .meetings-table {
+    font-size: 0.875rem;
+  }
+  
+  .meetings-table th,
+  .meetings-table td {
+    padding: 0.5rem;
+  }
+}
+
+/* Status badge animations */
+.status-badge {
+  transition: all 0.2s ease-in-out;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+

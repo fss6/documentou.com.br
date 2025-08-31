@@ -29,3 +29,10 @@
 
 en:
   hello: "Hello world"
+  
+  # Wizard Steps
+  meetings:
+    wizard:
+      meeting_step: "Meeting"
+      content_step: "Content"
+      agenda_step: "Agenda"

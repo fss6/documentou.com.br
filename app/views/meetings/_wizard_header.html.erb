@@ -3,7 +3,7 @@
   <div class="flex justify-between items-start">
     <div>
       <h1 class="mt-4 text-3xl font-bold text-gray-900"><%= meeting.new_record? ? "Nova Reunião" : "Editar Reunião" %></h1>
-      <p class="mt-2 text-sm text-gray-600"><%= meeting.new_record? ? "Crie uma nova reunião" : "Atualize os dados da reunião" %></p>
+      <p class="text-sm text-gray-600"><%= meeting.new_record? ? "Crie uma nova reunião" : "Atualize os dados da reunião" %></p>
     </div>
   </div>
 </div>
@@ -23,7 +23,7 @@
           <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'meeting' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
             <span class="text-sm font-medium">1</span>
           </div>
-          <span class="ml-2 text-sm font-medium <%= @step == 'meeting' ? 'text-blue-600' : 'text-gray-500' %>">Meeting</span>
+          <span class="ml-2 text-sm font-medium <%= @step == 'meeting' ? 'text-blue-600' : 'text-gray-500' %>"><%= t('meetings.wizard.meeting_step') %></span>
         </button>
       </div>
       
@@ -41,7 +41,7 @@
           <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'content' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
             <span class="text-sm font-medium">2</span>
           </div>
-          <span class="ml-2 text-sm font-medium <%= @step == 'content' ? 'text-blue-600' : 'text-gray-500' %>">Content</span>
+          <span class="ml-2 text-sm font-medium <%= @step == 'content' ? 'text-blue-600' : 'text-gray-500' %>"><%= t('meetings.wizard.content_step') %></span>
         </button>
       </div>
       
@@ -59,7 +59,7 @@
           <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'agenda' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
             <span class="text-sm font-medium">3</span>
           </div>
-          <span class="ml-2 text-sm font-medium <%= @step == 'agenda' ? 'text-blue-600' : 'text-gray-500' %>">Agenda</span>
+          <span class="ml-2 text-sm font-medium <%= @step == 'agenda' ? 'text-blue-600' : 'text-gray-500' %>"><%= t('meetings.wizard.agenda_step') %></span>
         </button>
       </div>
     </div>

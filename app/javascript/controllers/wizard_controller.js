@@ -7,9 +7,7 @@ export default class extends Controller {
     meetingId: Number
   }
 
-  connect() {
-    console.log('Wizard controller connected')
-  }
+  connect() {}
 
   navigateToStep(event) {
     const step = event.currentTarget.dataset.step
