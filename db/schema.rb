@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_31_111837) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_200507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,6 +54,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_111837) do
     t.index ["creator_id"], name: "index_meetings_on_creator_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.text "description"
+    t.bigint "owner_id", null: false
+    t.date "deadline"
+    t.bigint "meeting_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_tasks_on_meeting_id"
+    t.index ["owner_id"], name: "index_tasks_on_owner_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -79,5 +91,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_111837) do
   add_foreign_key "agendas", "meetings"
   add_foreign_key "contents", "meetings"
   add_foreign_key "meetings", "users", column: "creator_id"
+  add_foreign_key "tasks", "meetings"
+  add_foreign_key "tasks", "users", column: "owner_id"
   add_foreign_key "users", "accounts"
 end

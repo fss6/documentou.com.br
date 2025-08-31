@@ -445,3 +445,74 @@
   transform: scale(1.05);
 }
 
+/* Kanban Board Styles */
+.kanban-board { min-height: 600px; }
+.kanban-column { min-height: 500px; }
+
+/* Post-it Style Task Cards */
+.task-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  opacity: 0.8;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+.task-card[data-status="pending"]::before {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.task-card[data-status="in_progress"]::before {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.task-card[data-status="completed"]::before {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+/* Sortable.js Styles for Kanban */
+.sortable-ghost { 
+  opacity: 0.4; 
+  background-color: #f3f4f6; 
+  border: 2px dashed #d1d5db; 
+  transform: rotate(2deg);
+}
+
+.sortable-chosen { 
+  background-color: #fef3c7; 
+  border-color: #f59e0b; 
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+}
+
+.sortable-drag { 
+  opacity: 0.8; 
+  transform: rotate(3deg) scale(1.02); 
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .kanban-board .grid { grid-template-columns: 1fr; }
+  .kanban-column { min-height: auto; }
+}
+

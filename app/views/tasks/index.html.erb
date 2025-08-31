@@ -1,0 +1,97 @@
+<div class="min-h-screen bg-gray-50 p-6">
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900">Quadro Kanban</h1>
+        <p class="mt-2 text-gray-600">Gerencie suas tarefas de forma visual</p>
+      </div>
+      <%= link_to new_task_path, class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+        <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Nova Tarefa
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Kanban Board -->
+  <div class="kanban-board" data-controller="kanban">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Coluna: TODO -->
+      <div class="kanban-column" data-status="pending">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <!-- Header da Coluna -->
+          <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">TODO</h3>
+              <span class="bg-blue-500 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                <%= @kanban_columns['pending'].count %>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Área dos Cards -->
+          <div class="p-4 space-y-3 min-h-[500px]" data-kanban-target="column" data-status="pending">
+            <% @kanban_columns['pending'].each do |task| %>
+              <%= render 'task_card', task: task %>
+            <% end %>
+            
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna: DOING -->
+      <div class="kanban-column" data-status="in_progress">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <!-- Header da Coluna -->
+          <div class="bg-orange-500 text-white px-4 py-3 rounded-t-lg">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">DOING</h3>
+              <span class="bg-orange-400 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                <%= @kanban_columns['in_progress'].count %>/4
+              </span>
+            </div>
+          </div>
+          
+          <!-- Área dos Cards -->
+          <div class="p-4 space-y-3 min-h-[500px]" data-kanban-target="column" data-status="in_progress">
+            <% @kanban_columns['in_progress'].each do |task| %>
+              <%= render 'task_card', task: task %>
+            <% end %>
+            
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna: DONE -->
+      <div class="kanban-column" data-status="completed">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <!-- Header da Coluna -->
+          <div class="bg-green-600 text-white px-4 py-3 rounded-t-lg">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">DONE</h3>
+              <span class="bg-green-500 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                <%= @kanban_columns['completed'].count %>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Área dos Cards -->
+          <div class="p-4 space-y-3 min-h-[500px]" data-kanban-target="column" data-status="completed">
+            <% @kanban_columns['completed'].each do |task| %>
+              <%= render 'task_card', task: task %>
+            <% end %>
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

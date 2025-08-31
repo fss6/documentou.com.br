@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :account
   has_many :meetings, foreign_key: :creator_id
+  has_many :tasks, foreign_key: :owner_id
   
   validates :email, presence: true, uniqueness: { scope: :account_id }
   validates :name, presence: true
