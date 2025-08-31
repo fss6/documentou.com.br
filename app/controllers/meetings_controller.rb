@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: %i[ show edit update destroy ]
+  before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas]
 
   # GET /meetings or /meetings.json
   def index
@@ -70,6 +70,39 @@ class MeetingsController < ApplicationController
       format.html { redirect_to meetings_path, notice: "Meeting was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
+  end
+
+  # PATCH /meetings/1/reorder_agendas
+  def reorder_agendas
+    positions = params[:positions]
+    
+    if positions.blank?
+      render json: { success: false, message: 'Posições não fornecidas' }, status: :bad_request
+      return
+    end
+
+    ActiveRecord::Base.transaction do
+      positions.each do |position_data|
+        agenda_id = position_data[:id]
+        new_position = position_data[:position]
+        
+        agenda = @meeting.agendas.find(agenda_id)
+        agenda.update!(position: new_position)
+      end
+    end
+
+
+    agendas = @meeting.agendas.order(:position).map { |agenda| { id: agenda.id, title: agenda.title, position: agenda.position } }
+
+    render json: { 
+      success: true, 
+      message: 'Agenda reordenada com sucesso!',
+      agendas: agendas
+    }
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { success: false, message: 'Item da agenda não encontrado' }, status: :not_found
+  rescue StandardError => e
+    render json: { success: false, message: 'Erro ao reordenar agenda: ' + e.message }, status: :unprocessable_entity
   end
 
   private

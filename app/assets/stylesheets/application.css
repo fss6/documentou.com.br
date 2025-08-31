@@ -325,3 +325,51 @@
     padding: 0.5rem;
   }
 }
+
+/* Sortable.js Styles */
+.sortable-ghost {
+  opacity: 0.5;
+  background-color: #f3f4f6;
+  border: 2px dashed #d1d5db;
+}
+
+.sortable-chosen {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sortable-drag {
+  opacity: 0.8;
+  transform: rotate(5deg);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.drag-handle {
+  cursor: grab;
+  color: #6b7280;
+  transition: color 0.15s ease-in-out;
+}
+
+.drag-handle:hover {
+  color: #374151;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Agenda item hover effect */
+.agenda-item:hover .drag-handle {
+  color: #3b82f6;
+}
+
+/* Smooth transitions for reordering */
+.agenda-item {
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.agenda-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
