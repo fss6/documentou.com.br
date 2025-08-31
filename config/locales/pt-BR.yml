@@ -46,6 +46,8 @@ pt-BR:
     models:
       meeting: "Reunião"
       meetings: "Reuniões"
+      content: "Conteúdo"
+      contents: "Conteúdos"
       user: "Usuário"
       users: "Usuários"
     attributes:
@@ -56,6 +58,10 @@ pt-BR:
         end_datetime: "Data e Hora de Término"
         location: "Local"
         user_id: "Responsável"
+      content:
+        introduction: "Introdução"
+        summary: "Resumo"
+        closing: "Encerramento"
       user:
         email: "E-mail"
         password: "Senha"
@@ -145,3 +151,7 @@ pt-BR:
       description: "Descreva o propósito e objetivos da reunião"
       location: "Local da reunião (presencial ou virtual)"
       responsible: "Selecione o responsável"
+    content:
+      introduction: "Introdução da reunião (opcional)"
+      summary: "Resumo da reunião (opcional)"
+      closing: "Encerramento da reunião (opcional)"

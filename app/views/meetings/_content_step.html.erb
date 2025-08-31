@@ -32,37 +32,27 @@
     <% end %>
     
     <%= form.fields_for :content, @content do |content_form| %>
-      <!-- Introduction Field -->
-      <div class="space-y-1 mt-6">
+      <!-- Introduction Field (Rich Text with Quill) -->
+      <div class="space-y-1 mt-6" 
+           data-controller="quill" 
+           data-quill-placeholder-value="<%= t('placeholders.content.introduction') %>"
+           data-quill-rows-value="20">
         <%= content_form.label :introduction, class: "block text-sm font-medium text-gray-700" %>
-        <%= content_form.text_area :introduction, 
-            rows: 4,
-            class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-            placeholder: "Introdução da reunião (opcional)" %>
-      </div>
-
-      <!-- Summary Field -->
-      <div class="space-y-1 mt-6">
-        <%= content_form.label :summary, class: "block text-sm font-medium text-gray-700" %>
-        <%= content_form.text_area :summary, 
-            rows: 4,
-            class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-            placeholder: "Resumo da reunião (opcional)" %>
-      </div>
-
-      <!-- Closing Field -->
-      <div class="space-y-1 mt-6">
-        <%= content_form.label :closing, class: "block text-sm font-medium text-gray-700" %>
-        <%= content_form.text_area :closing, 
-            rows: 4,
-            class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-            placeholder: "Encerramento da reunião (opcional)" %>
+        
+        <!-- Hidden input para o Rails -->
+        <%= content_form.hidden_field :introduction, data: { quill_target: "input" } %>
+        
+        <!-- Container do Quill -->
+        <div class="quill-container">
+          <!-- Use uma das classes: quill-editor--narrow, quill-editor--wide, quill-editor--full -->
+          <div data-quill-target="editor" class="quill-editor quill-editor--full"></div>
+        </div>
       </div>
     <% end %>
   </div>
 
   <!-- Submit Button -->
-  <div class="flex justify-between pt-6 border-t border-gray-200">
+  <div class="flex justify-between pt-4">
     <%= link_to "Voltar", edit_meeting_path(@meeting, step: 'meeting'), 
         class: "px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
     
