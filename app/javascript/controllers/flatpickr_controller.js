@@ -1,26 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
+import flatpickr from "flatpickr"
 
 export default class extends Controller {
   connect() {
-    // Verificar se Flatpickr está disponível globalmente
-    if (typeof flatpickr !== 'undefined') {
-      this.initializeFlatpickr()
-    } else {
-      // Aguardar um pouco e tentar novamente
-      setTimeout(() => this.initializeFlatpickr(), 100)
-    }
-  }
-
-  initializeFlatpickr() {
-    if (typeof flatpickr === 'undefined') {
-      console.error("Flatpickr não está disponível")
-      return
-    }
-
     // Configurações para português brasileiro
     const config = {
       enableTime: true,
-      dateFormat: "Y-m-d H:i", // Formato que o Rails pode parsear
+      dateFormat: "d/m/Y H:i", // Formato brasileiro para exibição
       time_24hr: true,
       locale: {
         firstDayOfWeek: 1,
@@ -42,8 +28,10 @@ export default class extends Controller {
       },
       allowInput: true,
       clickOpens: true,
-      minuteIncrement: 15,
-      placeholder: "Selecione data e hora"
+      minuteIncrement: 1,
+      placeholder: "Selecione data e hora",
+      // Não usar onChange para não interferir na exibição
+      // O Rails vai parsear o formato brasileiro automaticamente
     }
 
     this.flatpickr = flatpickr(this.element, config)

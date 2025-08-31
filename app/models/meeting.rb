@@ -16,9 +16,17 @@ class Meeting < ApplicationRecord
   def start_datetime=(value)
     if value.is_a?(String) && value.present?
       begin
-        # Tentar parsear no formato Y-m-d H:i
-        parsed_time = Time.strptime(value, "%Y-%m-%d %H:%M")
-        super(parsed_time)
+        # Tentar parsear no formato brasileiro d/m/Y H:i
+        if value.match?(/\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}/)
+          day, month, year, time = value.split(/[\/\s]/)
+          hour, minute = time.split(':')
+          parsed_time = Time.new(year.to_i, month.to_i, day.to_i, hour.to_i, minute.to_i)
+          super(parsed_time)
+        else
+          # Tentar parsear no formato Y-m-d H:i
+          parsed_time = Time.strptime(value, "%Y-%m-%d %H:%M")
+          super(parsed_time)
+        end
       rescue ArgumentError
         # Se falhar, tentar parsear normalmente
         super(value)
@@ -31,9 +39,17 @@ class Meeting < ApplicationRecord
   def end_datetime=(value)
     if value.is_a?(String) && value.present?
       begin
-        # Tentar parsear no formato Y-m-d H:i
-        parsed_time = Time.strptime(value, "%Y-%m-%d %H:%M")
-        super(parsed_time)
+        # Tentar parsear no formato brasileiro d/m/Y H:i
+        if value.match?(/\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}/)
+          day, month, year, time = value.split(/[\/\s]/)
+          hour, minute = time.split(':')
+          parsed_time = Time.new(year.to_i, month.to_i, day.to_i, hour.to_i, minute.to_i)
+          super(parsed_time)
+        else
+          # Tentar parsear no formato Y-m-d H:i
+          parsed_time = Time.strptime(value, "%Y-%m-%d %H:%M")
+          super(parsed_time)
+        end
       rescue ArgumentError
         # Se falhar, tentar parsear normalmente
         super(value)
