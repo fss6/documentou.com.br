@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  introduction: MyText
+  summary: MyText
+  closing: MyText
+  meeting: one
+
+two:
+  introduction: MyText
+  summary: MyText
+  closing: MyText
+  meeting: two
