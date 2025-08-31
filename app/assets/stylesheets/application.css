@@ -449,44 +449,25 @@
 .kanban-board { min-height: 600px; }
 .kanban-column { min-height: 500px; }
 
-/* Post-it Style Task Cards */
+/* Trello-style Task Cards */
 .task-card {
-  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border: none;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
 }
 
-.task-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-  opacity: 0.8;
-}
-
 .task-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.task-card[data-status="pending"]::before {
-  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-}
-
-.task-card[data-status="in_progress"]::before {
-  background: linear-gradient(90deg, #f59e0b, #d97706);
-}
-
-.task-card[data-status="completed"]::before {
-  background: linear-gradient(90deg, #10b981, #059669);
+/* Column Background - Trello style */
+.kanban-column .bg-white {
+  background-color: #f4f5f7 !important;
 }
 
 /* Sortable.js Styles for Kanban */

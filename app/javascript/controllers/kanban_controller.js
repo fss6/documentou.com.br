@@ -7,7 +7,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log('Kanban controller conectado')
     this.waitForSortable()
   }
 
@@ -19,10 +18,8 @@ export default class extends Controller {
 
   waitForSortable() {
     if (typeof Sortable !== 'undefined') {
-      console.log('Sortable disponível:', typeof Sortable)
       this.initializeSortable()
     } else {
-      console.log('Aguardando Sortable.js carregar...')
       setTimeout(() => this.waitForSortable(), 100)
     }
   }
@@ -92,12 +89,28 @@ export default class extends Controller {
   }
 
   updateCounters() {
+    console.log('Atualizando contadores...')
     this.columnTargets.forEach(column => {
       const status = column.dataset.status
-      const counter = column.querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100')
+      // Navegar para a div pai que contém o header com o contador
+      const columnElement = column.closest('.kanban-column')
+      
+      // Procurar pelo contador correto baseado no status da coluna
+      let counter
+      if (status === 'pending') {
+        counter = columnElement.querySelector('.bg-blue-500')
+      } else if (status === 'in_progress') {
+        counter = columnElement.querySelector('.bg-orange-400')
+      } else if (status === 'completed') {
+        counter = columnElement.querySelector('.bg-green-500')
+      }
+      
       if (counter) {
         const count = column.querySelectorAll('.task-card').length
         counter.textContent = count
+        console.log(`Coluna ${status}: ${count} tarefas`)
+      } else {
+        console.warn(`Contador não encontrado para coluna ${status}`)
       }
     })
   }
