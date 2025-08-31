@@ -20,6 +20,15 @@ export default class extends Controller {
   confirmDelete(event) {
     const button = event.currentTarget
     const item = button.closest('.agenda-item')
+    const agendaId = item.dataset.agendaAgendaIdValue
+    
+    // Se não tem ID, deletar diretamente sem modal
+    if (!agendaId) {
+      item.remove()
+      this.renumberItems()
+      return
+    }
+    
     const agendaTitle = button.dataset.agendaAgendaTitleValue || 'este tópico'
     
     // Armazenar o item para deletar
@@ -175,20 +184,30 @@ export default class extends Controller {
     div.setAttribute('data-agenda-target', 'item')
     div.innerHTML = `
       <div class="space-y-3">
-        <!-- Header with number and title -->
+        <!-- Header with number, drag handle and title -->
         <div class="flex items-center space-x-3">
+          <!-- Drag Handle -->
+          <div class="flex-shrink-0 drag-handle" title="Arrastar para reordenar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+            </svg>
+          </div>
+          
+          <!-- Number Badge -->
           <div class="flex-shrink-0">
             <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-              <span class="text-xs font-medium text-blue-600">${this.itemCount}</span>
+              <span class="text-xs font-medium text-blue-600 item-number">${this.itemCount}</span>
             </div>
           </div>
+          
+          <!-- Title Input -->
           <div class="flex-1">
             <input type="text" name="title" placeholder="Título do tópico" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
           </div>
         </div>
         
         <!-- Description -->
-        <div class="ml-9">
+        <div class="ml-14">
           <textarea name="description" placeholder="Descrição do tópico (opcional)" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
           <input type="hidden" name="position" value="${this.itemCount}">
         </div>
