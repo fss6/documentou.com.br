@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_114727) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_111837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_114727) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "agendas", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "position"
+    t.bigint "meeting_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_agendas_on_meeting_id"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.text "introduction", default: ""
+    t.text "summary", default: ""
+    t.text "closing", default: ""
+    t.bigint "meeting_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_contents_on_meeting_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -56,6 +76,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_114727) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "agendas", "meetings"
+  add_foreign_key "contents", "meetings"
   add_foreign_key "meetings", "users", column: "creator_id"
   add_foreign_key "users", "accounts"
 end

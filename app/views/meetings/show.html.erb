@@ -127,20 +127,6 @@
               </dd>
             </div>
           <% end %>
-          
-          <% if @meeting.user.present? %>
-            <div>
-              <dt class="text-sm font-medium text-gray-500">Responsável</dt>
-              <dd class="mt-1 text-sm text-gray-900">
-                <div class="flex items-center">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                  </svg>
-                  <%= @meeting.user.email %>
-                </div>
-              </dd>
-            </div>
-          <% end %>
         </dl>
       </div>
     </div>

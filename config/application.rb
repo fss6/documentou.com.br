@@ -26,5 +26,9 @@ module DocumentouComBr
     config.i18n.default_locale = :'pt-BR'
     config.i18n.available_locales = [:'pt-BR', :en]
     config.i18n.fallbacks = true
+    
+    # Configure date formats
+    Date::DATE_FORMATS[:default] = "%Y-%m-%d"
+    Time::DATE_FORMATS[:default] = "%Y-%m-%d %H:%M:%S"
   end
 end

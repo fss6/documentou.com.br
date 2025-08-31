@@ -60,6 +60,40 @@ pt-BR:
         email: "E-mail"
         password: "Senha"
         password_confirmation: "Confirmação de Senha"
+    errors:
+      models:
+        meeting:
+          attributes:
+            title:
+              blank: "não pode ficar em branco"
+            start_datetime:
+              blank: "não pode ficar em branco"
+            end_datetime:
+              blank: "não pode ficar em branco"
+            location:
+              blank: "não pode ficar em branco"
+            description:
+              blank: "não pode ficar em branco"
+      messages:
+        blank: "não pode ficar em branco"
+        taken: "já está em uso"
+        invalid: "não é válido"
+        too_short: "é muito curto (mínimo %{count} caracteres)"
+        too_long: "é muito longo (máximo %{count} caracteres)"
+        not_a_number: "não é um número"
+        greater_than: "deve ser maior que %{count}"
+        less_than: "deve ser menor que %{count}"
+        greater_than_or_equal_to: "deve ser maior ou igual a %{count}"
+        less_than_or_equal_to: "deve ser menor ou igual a %{count}"
+        inclusion: "não está incluído na lista"
+        exclusion: "está reservado"
+        confirmation: "não confere com a confirmação"
+        accepted: "deve ser aceito"
+        empty: "não pode ficar vazio"
+        required: "não pode ficar em branco"
+        date: "não é uma data válida"
+        time: "não é um horário válido"
+        datetime: "não é uma data e hora válida"
 
   # Common words
   common:

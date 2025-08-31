@@ -1,0 +1,111 @@
+<!-- Agenda Step -->
+<div class="p-6 space-y-6" data-controller="agenda" data-agenda-meeting-id-value="<%= @meeting.id %>">
+  <h2 class="text-lg font-medium text-gray-900 mb-4">Agenda da Reunião</h2>
+  <p class="text-sm text-gray-600 mb-6">Defina os tópicos que serão discutidos na reunião</p>
+  
+  <!-- Agenda Items -->
+  <div id="agenda-items" class="space-y-4">
+    <% @meeting.agendas.each_with_index do |agenda, index| %>
+      <div class="agenda-item border border-gray-200 rounded-md p-4" data-agenda-target="item" data-agenda-agenda-id-value="<%= agenda.id %>">
+        <div class="space-y-3">
+          <!-- Header with number and title -->
+          <div class="flex items-center space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                <span class="text-xs font-medium text-blue-600"><%= index + 1 %></span>
+              </div>
+            </div>
+            <div class="flex-1">
+              <input type="text" 
+                     name="title" 
+                     value="<%= agenda.title %>"
+                     placeholder="Título do tópico"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                     data-agenda-target="title">
+            </div>
+          </div>
+          
+          <!-- Description -->
+          <div class="ml-9">
+            <textarea name="description" 
+                      placeholder="Descrição do tópico (opcional)"
+                      rows="2"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      data-agenda-target="description"><%= agenda.description %></textarea>
+            <input type="hidden" name="position" value="<%= index + 1 %>">
+          </div>
+          
+          <!-- Action buttons at bottom -->
+          <div class="flex justify-end space-x-2 pt-2 border-t border-gray-100">
+            <!-- Save Button -->
+            <button type="button" class="text-green-600 hover:text-green-700 p-1" data-action="click->agenda#saveItem" title="Salvar item" data-agenda-target="saveButton">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+              </svg>
+            </button>
+            <!-- Delete Button -->
+            <button type="button" class="text-red-500 hover:text-red-700 p-1" data-action="click->agenda#confirmDelete" title="Remover item" data-agenda-target="deleteButton" data-agenda-agenda-title-value="<%= agenda.title %>">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+              </svg>
+            </button>
+            <!-- Hidden destroy field -->
+            <input type="hidden" name="_destroy" value="0" class="destroy-field">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <!-- Add Agenda Item Button -->
+  <button type="button" data-action="click->agenda#addItem" class="mt-4 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+    Adicionar Tópico
+  </button>
+
+  <!-- Navigation Buttons -->
+  <div class="flex justify-between pt-6 border-t border-gray-200">
+    <%= link_to "Voltar", edit_meeting_path(@meeting, step: 'content'), 
+        class: "px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+    
+    <%= link_to "Finalizar", @meeting, 
+        class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="fixed inset-0 modal-backdrop overflow-y-auto h-full w-full hidden z-50" data-agenda-target="modal">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-2xl rounded-lg bg-white">
+      <div class="mt-3 text-center">
+        <!-- Icon -->
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+          <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        
+        <!-- Title -->
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Confirmar Exclusão</h3>
+        
+        <!-- Message -->
+        <div class="mt-2 px-7 py-3">
+          <p class="text-sm text-gray-500">
+            Tem certeza que deseja excluir o tópico "<span id="agenda-title" class="font-medium text-gray-700"></span>"?
+          </p>
+          <p class="text-xs text-gray-400 mt-2">Esta ação não pode ser desfeita.</p>
+        </div>
+        
+        <!-- Buttons -->
+        <div class="flex justify-center space-x-3 mt-4">
+          <button type="button" data-action="click->agenda#cancelDelete" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            Cancelar
+          </button>
+          <button type="button" data-action="click->agenda#deleteItem" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+            Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

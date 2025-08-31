@@ -1,0 +1,73 @@
+<!-- Header -->
+<div class="mb-8">
+  <div class="flex justify-between items-start">
+    <div>
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <%= link_to meetings_path, class: "text-gray-500 hover:text-gray-700" do %>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+              </svg>
+            <% end %>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <%= link_to "Reuniões", meetings_path, class: "ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" %>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-gray-500"><%= meeting.new_record? ? "Nova Reunião" : "Editar Reunião" %></span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mt-4 text-3xl font-bold text-gray-900"><%= meeting.new_record? ? "Nova Reunião" : "Editar Reunião" %></h1>
+      <p class="mt-2 text-sm text-gray-600"><%= meeting.new_record? ? "Crie uma nova reunião" : "Atualize os dados da reunião" %></p>
+    </div>
+  </div>
+</div>
+
+<!-- Wizard Steps -->
+<div class="mb-8">
+  <div class="flex items-center justify-center">
+    <div class="flex items-center space-x-4">
+      <!-- Step 1: Meeting -->
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'meeting' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
+          <span class="text-sm font-medium">1</span>
+        </div>
+        <span class="ml-2 text-sm font-medium <%= @step == 'meeting' ? 'text-blue-600' : 'text-gray-500' %>">Meeting</span>
+      </div>
+      
+      <!-- Connector -->
+      <div class="w-16 h-0.5 bg-gray-200"></div>
+      
+      <!-- Step 2: Content -->
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'content' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
+          <span class="text-sm font-medium">2</span>
+        </div>
+        <span class="ml-2 text-sm font-medium <%= @step == 'content' ? 'text-blue-600' : 'text-gray-500' %>">Content</span>
+      </div>
+      
+      <!-- Connector -->
+      <div class="w-16 h-0.5 bg-gray-200"></div>
+      
+      <!-- Step 3: Agenda -->
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-8 h-8 rounded-full <%= @step == 'agenda' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' %>">
+          <span class="text-sm font-medium">3</span>
+        </div>
+        <span class="ml-2 text-sm font-medium <%= @step == 'agenda' ? 'text-blue-600' : 'text-gray-500' %>">Agenda</span>
+      </div>
+    </div>
+  </div>
+</div>

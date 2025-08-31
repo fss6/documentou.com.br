@@ -20,7 +20,7 @@ export default class extends Controller {
     // Configurações para português brasileiro
     const config = {
       enableTime: true,
-      dateFormat: "d/m/Y H:i",
+      dateFormat: "Y-m-d H:i", // Formato que o Rails pode parsear
       time_24hr: true,
       locale: {
         firstDayOfWeek: 1,
