@@ -100,11 +100,34 @@ export default class extends Controller {
 
   showSuccess(message) {
     // Implementar notificação de sucesso
-    console.log('Sucesso:', message)
+    this.showToast(message, 'success')
   }
 
   showError(message) {
     // Implementar notificação de erro
-    console.error('Erro:', message)
+    this.showToast(message, 'error')
+  }
+
+  showToast(message, type = 'info') {
+    // Buscar o controller toast global
+    const toastController = this.application.getControllerForElementAndIdentifier(document.body, 'toast')
+    if (toastController) {
+      switch (type) {
+        case 'success':
+          toastController.success(message)
+          break
+        case 'error':
+          toastController.error(message)
+          break
+        case 'warning':
+          toastController.warning(message)
+          break
+        default:
+          toastController.info(message)
+      }
+    } else {
+      // Fallback para console se o toast não estiver disponível
+      console.log(type === 'error' ? 'Erro:' : 'Sucesso:', message)
+    }
   }
 }

@@ -98,13 +98,14 @@ export default class extends Controller {
         // Remover o item do DOM
         itemToRemove.remove()
         this.renumberItems()
+        this.showToast('Item excluído com sucesso!', 'success')
       } else {
-        alert('Erro ao excluir: ' + (data.error || 'Erro desconhecido'))
+        this.showToast('Erro ao excluir: ' + (data.error || 'Erro desconhecido'), 'error')
       }
     })
     .catch(error => {
       console.error('Erro:', error)
-      alert('Erro ao excluir o item da agenda')
+      this.showToast('Erro ao excluir o item da agenda', 'error')
     })
   }
 
@@ -118,7 +119,7 @@ export default class extends Controller {
     const description = descInput.value.trim()
     
     if (!title) {
-      alert('Por favor, preencha o título do tópico')
+      this.showToast('Por favor, preencha o título do tópico', 'error')
       titleInput.focus()
       return
     }
@@ -168,13 +169,16 @@ export default class extends Controller {
         if (!agendaId && data.agenda_id) {
           item.dataset.agendaAgendaIdValue = data.agenda_id
         }
+        
+        // Mostrar toast de sucesso
+        this.showToast('Item salvo com sucesso!', 'success')
       } else {
-        alert('Erro ao salvar: ' + (data.error || 'Erro desconhecido'))
+        this.showToast('Erro ao salvar: ' + (data.error || 'Erro desconhecido'), 'error')
       }
     })
     .catch(error => {
       console.error('Erro:', error)
-      alert('Erro ao salvar o item da agenda')
+      this.showToast('Erro ao salvar o item da agenda', 'error')
     })
   }
 
@@ -240,5 +244,28 @@ export default class extends Controller {
       }
     })
     this.itemCount = visibleItems.length
+  }
+
+  showToast(message, type = 'info') {
+    // Buscar o controller toast global
+    const toastController = this.application.getControllerForElementAndIdentifier(document.body, 'toast')
+    if (toastController) {
+      switch (type) {
+        case 'success':
+          toastController.success(message)
+          break
+        case 'error':
+          toastController.error(message)
+          break
+        case 'warning':
+          toastController.warning(message)
+          break
+        default:
+          toastController.info(message)
+      }
+    } else {
+      // Fallback para alert se o toast não estiver disponível
+      alert(message)
+    }
   }
 }
