@@ -88,6 +88,26 @@ class MeetingsController < ApplicationController
     end
   end
 
+  # PATCH /meetings/1/start
+  def start
+    if @meeting.can_start?
+      @meeting.start_meeting!
+      redirect_to @meeting, notice: 'Reunião iniciada com sucesso!'
+    else
+      redirect_to @meeting, alert: 'Não é possível iniciar esta reunião.'
+    end
+  end
+
+  # PATCH /meetings/1/complete
+  def complete
+    if @meeting.can_complete?
+      @meeting.complete_meeting!
+      redirect_to @meeting, notice: 'Reunião concluída com sucesso!'
+    else
+      redirect_to @meeting, alert: 'Não é possível concluir esta reunião.'
+    end
+  end
+
   # PATCH /meetings/1/reorder_agendas
   def reorder_agendas
     positions = params[:positions]
@@ -130,7 +150,7 @@ class MeetingsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def meeting_params
     params.require(:meeting).permit(
-      :title, :description, :start_datetime, :end_datetime, :location,
+      :title, :description, :start_datetime, :end_datetime, :location, :status,
       content_attributes: [:introduction, :summary, :closing],
       agendas_attributes: [:id, :title, :description, :position, :_destroy]
     )

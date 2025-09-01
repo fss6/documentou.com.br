@@ -6,10 +6,20 @@ class Meeting < ApplicationRecord
   accepts_nested_attributes_for :content
   accepts_nested_attributes_for :agendas, allow_destroy: true, reject_if: :all_blank
   
+  # Status da reunião
+  enum :status, {
+    scheduled: 'scheduled',      # Agendada
+    in_progress: 'in_progress',  # Em andamento
+    completed: 'completed'       # Concluída
+  }
+  
+
+  
   # Validações
   validates :title, presence: true
   validates :start_datetime, presence: true
   validates :end_datetime, presence: true
+  validates :status, presence: true, inclusion: { in: statuses.keys }
   validate :end_datetime_after_start_datetime
   
   # Parsear datas no formato do Flatpickr
@@ -57,6 +67,27 @@ class Meeting < ApplicationRecord
     else
       super(value)
     end
+  end
+  
+  # Métodos para gerenciar status
+  def start_meeting!
+    update!(status: :in_progress)
+  end
+  
+  def complete_meeting!
+    update!(status: :completed)
+  end
+  
+  def can_start?
+    scheduled?
+  end
+  
+  def can_complete?
+    in_progress?
+  end
+  
+  def status_display
+    I18n.t("meetings.status.#{status}", default: status&.titleize)
   end
   
   private

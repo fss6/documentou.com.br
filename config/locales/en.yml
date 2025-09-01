@@ -36,3 +36,7 @@ en:
       meeting_step: "Meeting"
       content_step: "Content"
       agenda_step: "Agenda"
+    status:
+      scheduled: "Scheduled"
+      in_progress: "In Progress"
+      completed: "Completed"

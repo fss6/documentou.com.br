@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :meetings do
     member do
       patch :reorder_agendas
+      patch :start
+      patch :complete
     end
   end
 

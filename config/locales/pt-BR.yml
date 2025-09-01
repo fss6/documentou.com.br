@@ -162,3 +162,7 @@ pt-BR:
       meeting_step: "Reunião"
       content_step: "Conteúdo"
       agenda_step: "Pauta"
+    status:
+      scheduled: "Agendada"
+      in_progress: "Em Andamento"
+      completed: "Concluída"
