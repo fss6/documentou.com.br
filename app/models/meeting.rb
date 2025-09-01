@@ -2,6 +2,8 @@ class Meeting < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_one :content, dependent: :destroy
   has_many :agendas, dependent: :destroy
+  has_many :decisions, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   
   accepts_nested_attributes_for :content
   accepts_nested_attributes_for :agendas, allow_destroy: true, reject_if: :all_blank

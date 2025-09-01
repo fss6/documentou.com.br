@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas]
+  before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas meeting_session start complete]
 
   # TODO add paginação com Pagy
   # GET /meetings or /meetings.json
@@ -92,10 +92,22 @@ class MeetingsController < ApplicationController
   def start
     if @meeting.can_start?
       @meeting.start_meeting!
-      redirect_to @meeting, notice: 'Reunião iniciada com sucesso!'
+      redirect_to meeting_session_path(@meeting), notice: 'Reunião iniciada com sucesso!'
     else
       redirect_to @meeting, alert: 'Não é possível iniciar esta reunião.'
     end
+  end
+
+  # GET /meetings/1/meeting_session
+  def meeting_session
+    # unless @meeting.in_progress?
+    #   redirect_to @meeting, alert: 'Esta reunião não está em andamento.'
+    #   return
+    # end
+    
+    @content = @meeting.content || @meeting.build_content
+    @agendas = @meeting.agendas.order(:position)
+    @decisions = @meeting.decisions
   end
 
   # PATCH /meetings/1/complete
@@ -105,6 +117,15 @@ class MeetingsController < ApplicationController
       redirect_to @meeting, notice: 'Reunião concluída com sucesso!'
     else
       redirect_to @meeting, alert: 'Não é possível concluir esta reunião.'
+    end
+  end
+
+  # PATCH /meetings/1/update_content
+  def update_content
+    if @meeting.content.update(content_params)
+      render json: { success: true, message: 'Conteúdo atualizado com sucesso!' }
+    else
+      render json: { success: false, message: @meeting.content.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 
@@ -151,9 +172,13 @@ class MeetingsController < ApplicationController
   def meeting_params
     params.require(:meeting).permit(
       :title, :description, :start_datetime, :end_datetime, :location, :status,
-      content_attributes: [:introduction, :summary, :closing],
+      content_attributes: [:id, :introduction, :summary, :closing],
       agendas_attributes: [:id, :title, :description, :position, :_destroy]
     )
+  end
+
+  def content_params
+    params.require(:content).permit(:summary, :closing)
   end
 
   def update_meeting_step

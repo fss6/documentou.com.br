@@ -5,10 +5,14 @@ Rails.application.routes.draw do
   
     
   resources :meetings do
+    resources :decisions, only: [:create]
+    
     member do
       patch :reorder_agendas
       patch :start
       patch :complete
+      patch :update_content
+      get :session, to: 'meetings#meeting_session'
     end
   end
 

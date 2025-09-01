@@ -1,0 +1,45 @@
+<!-- Formulário de Conteúdo -->
+<%= form_with model: @content, url: update_content_meeting_path(@meeting), local: false, 
+            data: { controller: "content-form" },
+            class: "space-y-6" do |form| %>
+  
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">Resumo das Discussões</label>
+    <div data-controller="quill" 
+         data-quill-placeholder-value="Resumo das discussões, pontos importantes, argumentos apresentados..."
+         data-quill-rows-value="8">
+      <!-- Hidden input para o Rails -->
+      <%= form.hidden_field :summary, data: { quill_target: "input" } %>
+      
+      <!-- Container do Quill -->
+      <div class="quill-container">
+        <div data-quill-target="editor" class="quill-editor quill-editor--full"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">Encerramento</label>
+    <div data-controller="quill" 
+         data-quill-placeholder-value="Conclusões, próximos passos, acordos finais..."
+         data-quill-rows-value="6">
+      <!-- Hidden input para o Rails -->
+      <%= form.hidden_field :closing, data: { quill_target: "input" } %>
+      
+      <!-- Container do Quill -->
+      <div class="quill-container">
+        <div data-quill-target="editor" class="quill-editor quill-editor--full"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pt-4 border-t border-gray-200">
+    <button type="submit" 
+            class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+      Salvar Conteúdo
+    </button>
+  </div>
+<% end %>

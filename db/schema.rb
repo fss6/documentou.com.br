@@ -45,8 +45,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_01_095302) do
   create_table "decisions", force: :cascade do |t|
     t.text "description"
     t.string "status"
+    t.bigint "meeting_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_decisions_on_meeting_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -98,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_01_095302) do
 
   add_foreign_key "agendas", "meetings"
   add_foreign_key "contents", "meetings"
+  add_foreign_key "decisions", "meetings"
   add_foreign_key "meetings", "users", column: "creator_id"
   add_foreign_key "tasks", "meetings"
   add_foreign_key "tasks", "users", column: "owner_id"

@@ -40,3 +40,10 @@ en:
       scheduled: "Scheduled"
       in_progress: "In Progress"
       completed: "Completed"
+  
+  # Decisions
+  decisions:
+    status:
+      pending: "Pending"
+      approved: "Approved"
+      rejected: "Rejected"

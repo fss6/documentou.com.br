@@ -166,3 +166,10 @@ pt-BR:
       scheduled: "Agendada"
       in_progress: "Em Andamento"
       completed: "Concluída"
+  
+  # Decisions
+  decisions:
+    status:
+      pending: "Pendente"
+      approved: "Aprovada"
+      rejected: "Rejeitada"

@@ -32,10 +32,27 @@ class TasksController < ApplicationController
     @task.owner = current_user
 
     if @task.save
-      redirect_to tasks_path, notice: 'Tarefa criada com sucesso!'
+      respond_to do |format|
+        format.html { redirect_to tasks_path, notice: 'Tarefa criada com sucesso!' }
+        format.json { 
+          render json: {
+            id: @task.id,
+            description: @task.description,
+            status: @task.status,
+            deadline: @task.deadline,
+            owner_name: @task.owner.name,
+            created_at: @task.created_at
+          }, status: :created 
+        }
+      end
     else
-      @meetings = current_user.meetings
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html do
+          @meetings = current_user.meetings
+          render :new, status: :unprocessable_entity
+        end
+        format.json { render json: { message: @task.errors.full_messages.join(', ') }, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -65,6 +65,9 @@ export default class extends Controller {
       // Sincronizar com o input hidden
       this.quill.on('text-change', () => {
         this.updateInput()
+        // Disparar evento input no input hidden para integrar com content-form
+        const event = new Event('input', { bubbles: true })
+        this.inputTarget.dispatchEvent(event)
       })
 
       // Carregar conteúdo inicial se existir
