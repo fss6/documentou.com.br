@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     
   resources :meetings do
     resources :decisions, only: [:create]
+    resources :agendas, only: [:update, :destroy] do
+      member do
+        patch :toggle_check
+      end
+    end
     
     member do
       patch :update_content

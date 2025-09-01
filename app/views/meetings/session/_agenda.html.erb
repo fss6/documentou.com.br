@@ -9,21 +9,30 @@
     <% if @agendas.any? %>
       <div class="space-y-4" data-controller="agenda-check">
         <% @agendas.each do |agenda| %>
-          <div class="flex items-start space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="flex-shrink-0">
+          <div class="agenda-item flex space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors <%= 'agenda-checked' if agenda.check %>"
+               data-controller="agenda-check"
+               data-agenda-check-agenda-id-value="<%= agenda.id %>"
+               data-agenda-check-meeting-id-value="<%= @meeting.id %>">
+            <div class="flex-shrink-0 flex items-center">
               <input type="checkbox" 
                      id="agenda_<%= agenda.id %>" 
                      class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
-                     data-action="change->agenda-check#toggleItem"
-                     data-agenda-id="<%= agenda.id %>">
+                     data-agenda-check-target="checkbox"
+                     data-action="change->agenda-check#toggleCheck"
+                     <%= 'checked' if agenda.check %>>
             </div>
-            <div class="flex-1">
-              <label for="agenda_<%= agenda.id %>" class="text-sm font-medium text-gray-900 cursor-pointer">
-                <%= agenda.title %>
-              </label>
-              <% if agenda.description.present? %>
-                <p class="text-sm text-gray-600 mt-1"><%= agenda.description %></p>
-              <% end %>
+            <div class="flex-1 flex items-center">
+              <div>
+                <label for="agenda_<%= agenda.id %>" class="text-sm font-medium text-gray-900 cursor-pointer">
+                  <%= agenda.title %>
+                </label>
+                <% if agenda.description.present? %>
+                  <p class="text-sm text-gray-600 mt-1"><%= agenda.description %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="flex-shrink-0 flex items-center">
+              <div data-agenda-check-target="status"></div>
             </div>
           </div>
         <% end %>

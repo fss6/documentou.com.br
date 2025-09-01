@@ -546,3 +546,38 @@
   color: #1d4ed8;
 }
 
+/* Quill Editor Readonly Mode */
+.quill-readonly .ql-editor {
+  background-color: #f9fafb;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.quill-readonly .ql-toolbar {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.quill-readonly .ql-editor p {
+  color: #6b7280;
+}
+
+/* Agenda Item States */
+.agenda-checked {
+  background-color: #f0f9ff !important;
+  border-color: #0ea5e9 !important;
+}
+
+.agenda-checked:hover {
+  background-color: #e0f2fe !important;
+}
+
+.agenda-unchecked {
+  background-color: #ffffff;
+  border-color: #e5e7eb;
+}
+
+.agenda-unchecked:hover {
+  background-color: #f9fafb;
+}
+

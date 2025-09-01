@@ -84,13 +84,9 @@ export default class extends Controller {
 
   loadInitialContent() {
     if (this.hasInputTarget && this.inputTarget.value) {
-      console.log('Carregando conteúdo inicial:', this.inputTarget.value)
-      // Decodificar HTML entities antes de carregar no Quill
+      // Carregando conteúdo inicial
       const decodedContent = this.decodeHtmlEntities(this.inputTarget.value)
-      console.log('Conteúdo decodificado:', decodedContent)
       this.quill.root.innerHTML = decodedContent
-    } else {
-      console.log('Nenhum conteúdo inicial encontrado')
     }
   }
 
