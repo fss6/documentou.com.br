@@ -1,16 +1,25 @@
 <!-- Summary Section -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200">
   <div class="p-6">
-    <label class="block text-sm font-medium text-gray-700 mb-2">Resumo das Discussões</label>
-    <div data-controller="quill" 
-         data-quill-placeholder-value="Resumo das discussões, pontos importantes, argumentos apresentados..."
-         data-quill-rows-value="8">
+    <div class="flex items-center justify-between mb-2">
+      <label class="block text-sm font-medium text-gray-700">Resumo das Discussões</label>
+      <div data-quill-auto-save-target="status" class="text-sm text-green-600">✅ Salvo</div>
+    </div>
+    
+    <div data-controller="quill-auto-save" 
+         data-quill-auto-save-url-value="<%= update_content_meeting_path(@meeting) %>"
+         data-quill-auto-save-field-value="summary"
+         data-quill-auto-save-meeting-id-value="<%= @meeting.id %>"
+         data-quill-auto-save-debounce-ms-value="2000"
+         data-quill-auto-save-placeholder-value="Resumo das discussões, pontos importantes, argumentos apresentados..."
+         data-quill-auto-save-rows-value="30">
+      
       <!-- Hidden input para o Rails -->
-      <input type="hidden" name="content[summary]" data-quill-target="input">
+      <input type="hidden" name="content[summary]" value="<%= html_escape(@content.summary.to_s) %>" data-quill-auto-save-target="input">
       
       <!-- Container do Quill -->
       <div class="quill-container">
-        <div data-quill-target="editor" class="quill-editor quill-editor--full"></div>
+        <div data-quill-auto-save-target="editor" class="quill-editor quill-editor--full"></div>
       </div>
     </div>
   </div>

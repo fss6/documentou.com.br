@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_01_095302) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_01_171113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -49,6 +49,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_01_095302) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meeting_id"], name: "index_decisions_on_meeting_id"
+  end
+
+  create_table "meeting_locks", force: :cascade do |t|
+    t.bigint "meeting_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "acquired_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id", "expires_at"], name: "index_meeting_locks_on_meeting_id_and_expires_at"
+    t.index ["meeting_id"], name: "index_meeting_locks_on_meeting_id"
+    t.index ["user_id", "meeting_id"], name: "index_meeting_locks_on_user_id_and_meeting_id"
+    t.index ["user_id"], name: "index_meeting_locks_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -101,6 +114,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_01_095302) do
   add_foreign_key "agendas", "meetings"
   add_foreign_key "contents", "meetings"
   add_foreign_key "decisions", "meetings"
+  add_foreign_key "meeting_locks", "meetings"
+  add_foreign_key "meeting_locks", "users"
   add_foreign_key "meetings", "users", column: "creator_id"
   add_foreign_key "tasks", "meetings"
   add_foreign_key "tasks", "users", column: "owner_id"

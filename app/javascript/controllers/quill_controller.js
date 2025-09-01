@@ -62,16 +62,18 @@ export default class extends Controller {
         this.setHeightFromRows(this.rowsValue)
       }
 
-      // Sincronizar com o input hidden
+      // Sincronizar com o input hidden (se existir)
       this.quill.on('text-change', () => {
-        this.updateInput()
-        // Disparar evento input no input hidden para integrar com content-form
-        const event = new Event('input', { bubbles: true })
-        this.inputTarget.dispatchEvent(event)
+        if (this.hasInputTarget) {
+          this.updateInput()
+          // Disparar evento input no input hidden para integrar com content-form
+          const event = new Event('input', { bubbles: true })
+          this.inputTarget.dispatchEvent(event)
+        }
       })
 
       // Carregar conteúdo inicial se existir
-      if (this.inputTarget.value) {
+      if (this.hasInputTarget && this.inputTarget.value) {
         this.quill.root.innerHTML = this.inputTarget.value
       }
     } catch (error) {
@@ -81,6 +83,9 @@ export default class extends Controller {
   }
 
   updateInput() {
+    // Só atualizar se tivermos um input target
+    if (!this.hasInputTarget || !this.quill) return
+    
     // Converter para HTML simples
     const html = this.quill.root.innerHTML
     this.inputTarget.value = html === '<p><br></p>' ? '' : html

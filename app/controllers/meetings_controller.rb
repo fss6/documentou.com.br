@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas meeting_session start complete]
+  before_action :set_meeting, only: %i[ show edit update destroy reorder_agendas meeting_session start complete update_content]
 
   # TODO add paginação com Pagy
   # GET /meetings or /meetings.json
@@ -178,7 +178,7 @@ class MeetingsController < ApplicationController
   end
 
   def content_params
-    params.require(:content).permit(:summary, :closing)
+    params.require(:content).permit(:introduction, :summary, :closing)
   end
 
   def update_meeting_step
