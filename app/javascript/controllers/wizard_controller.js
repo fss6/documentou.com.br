@@ -4,12 +4,18 @@ export default class extends Controller {
   static targets = ["step"]
   static values = {
     currentStep: String,
-    meetingId: Number
+    meetingId: Number,
+    isNewRecord: Boolean
   }
 
   connect() {}
 
   navigateToStep(event) {
+    // Se for new record, não permitir navegação entre steps
+    if (this.isNewRecordValue) {
+      return
+    }
+
     const step = event.currentTarget.dataset.step
     const meetingId = this.meetingIdValue
     
@@ -24,6 +30,11 @@ export default class extends Controller {
 
   // Método para verificar se um passo pode ser acessado
   canNavigateToStep(step) {
+    // Se for new record, não pode navegar entre steps
+    if (this.isNewRecordValue) {
+      return false
+    }
+
     const stepOrder = ['meeting', 'content', 'agenda']
     const currentIndex = stepOrder.indexOf(this.currentStepValue)
     const targetIndex = stepOrder.indexOf(step)
