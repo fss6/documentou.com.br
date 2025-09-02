@@ -13,9 +13,9 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel="manifest", href: pwa_manifest_path(format: :json) %>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="/logo.png" type="image/png">
+    <link rel="icon" href="/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/logo.png">
 
     <%# Includes Tailwind CSS %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
@@ -37,23 +37,19 @@
 
     <!-- Sidebar -->
     <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
-      <!-- Logo -->
-      <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-        <div class="flex items-center">
-          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <span class="ml-3 text-xl font-bold text-gray-900">Documentou</span>
-        </div>
-        <!-- Close button for mobile -->
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+             <!-- Logo -->
+       <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+         <div class="flex items-center">
+           <%= image_tag "logo.png", alt: "Documentou", class: "h-8 w-auto" %>
+           <span class="ml-2 text-xl font-bold text-gray-900">Documentou</span>
+         </div>
+         <!-- Close button for mobile -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+             </svg>
+           </button>
+       </div>
 
       <!-- Navigation -->
       <nav class="mt-6 px-3">
@@ -153,13 +149,6 @@
 
           <!-- Right side -->
           <div class="flex items-center space-x-4">
-            <!-- Notifications -->
-            <button class="p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M9 11h.01M9 8h.01M6 3h12a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3z"></path>
-              </svg>
-            </button>
 
             <!-- User menu -->
             <div class="relative">
