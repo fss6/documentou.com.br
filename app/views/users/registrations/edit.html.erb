@@ -1,0 +1,102 @@
+<% content_for :page_title, "Editar perfil" %>
+<% content_for :page_subtitle, "Atualize suas informações pessoais" %>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!-- Email Field -->
+  <div>
+    <label for="user_email" class="block text-sm font-medium text-gray-700 mb-2">
+      E-mail
+    </label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m6.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+        </svg>
+      </div>
+      <%= f.email_field :email, autocomplete: "email", 
+          class: "block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+          placeholder: "seu@email.com" %>
+    </div>
+  </div>
+
+  <!-- Current Password Field -->
+  <div>
+    <label for="user_current_password" class="block text-sm font-medium text-gray-700 mb-2">
+      Senha atual
+      <span class="text-xs text-gray-500">(para confirmar as alterações)</span>
+    </label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+      <%= f.password_field :current_password, autocomplete: "current-password",
+          class: "block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+          placeholder: "••••••••" %>
+    </div>
+  </div>
+
+  <!-- New Password Field (Optional) -->
+  <div>
+    <label for="user_password" class="block text-sm font-medium text-gray-700 mb-2">
+      Nova senha
+      <span class="text-xs text-gray-500">(deixe em branco se não quiser alterar)</span>
+      <% if @minimum_password_length %>
+        <span class="text-xs text-gray-500">(mínimo <%= @minimum_password_length %> caracteres)</span>
+      <% end %>
+    </label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+      <%= f.password_field :password, autocomplete: "new-password",
+          class: "block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+          placeholder: "••••••••" %>
+    </div>
+  </div>
+
+  <!-- Password Confirmation Field -->
+  <div>
+    <label for="user_password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
+      Confirmar nova senha
+    </label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password",
+          class: "block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+          placeholder: "••••••••" %>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex space-x-4">
+    <%= f.submit "Atualizar perfil", 
+        class: "flex-1 py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" %>
+    
+    <%= link_to "Voltar", :back, 
+        class: "flex-1 py-3 px-4 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-sm hover:shadow-md text-center" %>
+  </div>
+<% end %>
+
+<!-- Danger Zone -->
+<div class="mt-8 pt-6 border-t border-gray-200">
+  <div class="text-center">
+    <h3 class="text-lg font-medium text-gray-900 mb-4">Zona de Perigo</h3>
+    <p class="text-sm text-gray-600 mb-4">
+      Uma vez que você cancelar sua conta, não há como voltar atrás. Por favor, tenha certeza.
+    </p>
+    <%= button_to "Cancelar minha conta", registration_path(resource_name), 
+        data: { confirm: "Tem certeza? Esta ação não pode ser desfeita." }, 
+        method: :delete,
+        class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200" %>
+  </div>
+</div>
