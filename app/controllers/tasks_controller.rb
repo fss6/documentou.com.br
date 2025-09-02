@@ -3,12 +3,36 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = current_user.tasks.includes(:meeting).order(:deadline)
-    @kanban_columns = {
-      'pending' => @tasks.by_status('pending'),
-      'in_progress' => @tasks.by_status('in_progress'),
-      'completed' => @tasks.by_status('completed')
-    }
+    if params[:meeting_id]
+      # Buscar tasks de uma reunião específica
+      @meeting = Meeting.find(params[:meeting_id])
+      @tasks = @meeting.tasks.includes(:owner).order(:deadline)
+      
+      respond_to do |format|
+        format.json { 
+          render json: {
+            tasks: @tasks.map do |task|
+              {
+                id: task.id,
+                description: task.description,
+                status: task.status,
+                deadline: task.deadline,
+                owner_name: task.owner.name,
+                created_at: task.created_at
+              }
+            end
+          }
+        }
+      end
+    else
+      # Buscar todas as tasks do usuário (comportamento original)
+      @tasks = current_user.tasks.includes(:meeting).order(:deadline)
+      @kanban_columns = {
+        'pending' => @tasks.by_status('pending'),
+        'in_progress' => @tasks.by_status('in_progress'),
+        'completed' => @tasks.by_status('completed')
+      }
+    end
   end
 
   # GET /tasks/1
@@ -30,6 +54,13 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     @task.owner = current_user
+    @task.status = :pending
+
+    puts "===== TASK ERRORS ====="
+    puts "valid? : #{@task.valid?}"
+    puts "errors: #{@task.errors.full_messages}"
+    puts "errors: #{@task.errors.full_messages.inspect}"
+    puts @task.errors.full_messages.inspect
 
     if @task.save
       respond_to do |format|
@@ -115,6 +146,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:description, :deadline, :meeting_id, :status)
+    params.require(:task).permit(:description, :deadline, :meeting_id, :status, :owner_id)
   end
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         patch :toggle_check
       end
     end
+    resources :tasks, only: [:index, :create, :update, :destroy]
     
     member do
       patch :update_content
