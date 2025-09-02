@@ -1,11 +1,20 @@
 <!-- Summary Section -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200">
-  <div class="p-6">
-    <div class="flex items-center justify-between mb-2">
-      <label class="block text-sm font-medium text-gray-700">Resumo das Discussões</label>
-      <div data-quill-auto-save-target="status" class="text-sm text-green-600">✅ Salvo</div>
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+  <div class="px-6 py-6 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-100">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
+          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <label class="text-xl font-semibold text-gray-900">Resumo das Discussões</label>
+      </div>
+      <div data-quill-auto-save-target="status" class="text-sm text-green-600 font-medium bg-green-100 px-3 py-1 rounded-full">✅ Salvo</div>
     </div>
-    
+  </div>
+  
+  <div class="p-6">
     <div data-controller="quill-auto-save" 
          data-quill-auto-save-url-value="<%= update_content_meeting_path(@meeting) %>"
          data-quill-auto-save-field-value="summary"

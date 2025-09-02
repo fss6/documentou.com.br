@@ -1,10 +1,17 @@
 <!-- Decisions Section -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full" data-controller="decision" data-decision-meeting-id-value="<%= @meeting.id %>">
-  <div class="px-6 py-4 border-b border-gray-200">
+<div class="bg-white rounded-2xl shadow-lg border border-gray-200 h-full" data-controller="decision" data-decision-meeting-id-value="<%= @meeting.id %>">
+  <div class="px-6 py-6 bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-gray-100">
     <div class="flex items-center justify-between">
-      <h3 class="text-lg font-semibold text-gray-900">Decisões Tomadas</h3>
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900">Decisões Tomadas</h3>
+      </div>
       <button type="button" 
-              class="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+              class="p-3 text-blue-600 hover:text-blue-700 hover:bg-blue-100 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
               data-action="click->decision#showAddModal">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>

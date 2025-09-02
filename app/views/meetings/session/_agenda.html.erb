@@ -1,33 +1,42 @@
 <!-- Pauta da Reunião Section -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200">
-  <div class="px-6 py-4 border-b border-gray-200">
-    <h3 class="text-lg font-semibold text-gray-900">Pauta da Reunião</h3>
-    <p class="text-sm text-gray-600">Marque os itens conforme são discutidos</p>
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+  <div class="px-6 py-6 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-gray-100">
+    <div class="flex items-center">
+      <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold text-gray-900">Pauta da Reunião</h3>
+        <p class="text-sm text-gray-600 mt-1">Marque os itens conforme são discutidos</p>
+      </div>
+    </div>
   </div>
   
   <div class="p-6">
     <% if @agendas.any? %>
       <div class="space-y-4" data-controller="agenda-check">
         <% @agendas.each do |agenda| %>
-          <div class="agenda-item flex space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors <%= 'agenda-checked' if agenda.check %>"
+          <div class="agenda-item flex space-x-4 p-5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-200 <%= 'agenda-checked bg-green-50 border-green-200' if agenda.check %>"
                data-controller="agenda-check"
                data-agenda-check-agenda-id-value="<%= agenda.id %>"
                data-agenda-check-meeting-id-value="<%= @meeting.id %>">
             <div class="flex-shrink-0 flex items-center">
               <input type="checkbox" 
                      id="agenda_<%= agenda.id %>" 
-                     class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
+                     class="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded cursor-pointer transition-all duration-200"
                      data-agenda-check-target="checkbox"
                      data-action="change->agenda-check#toggleCheck"
                      <%= 'checked' if agenda.check %>>
             </div>
             <div class="flex-1 flex items-center">
               <div>
-                <label for="agenda_<%= agenda.id %>" class="text-sm font-medium text-gray-900 cursor-pointer">
+                <label for="agenda_<%= agenda.id %>" class="text-sm font-medium text-gray-900 cursor-pointer hover:text-green-700 transition-colors duration-200">
                   <%= agenda.title %>
                 </label>
                 <% if agenda.description.present? %>
-                  <p class="text-sm text-gray-600 mt-1"><%= agenda.description %></p>
+                  <p class="text-sm text-gray-600 mt-2 leading-relaxed"><%= agenda.description %></p>
                 <% end %>
               </div>
             </div>
@@ -38,7 +47,14 @@
         <% end %>
       </div>
     <% else %>
-      <p class="text-sm text-gray-500 italic">Nenhum item na pauta foi definido.</p>
+      <div class="text-center py-12">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <p class="text-sm text-gray-500">Nenhum item na pauta foi definido.</p>
+      </div>
     <% end %>
   </div>
 </div>

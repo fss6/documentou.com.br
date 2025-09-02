@@ -1,30 +1,32 @@
 <div class="min-h-screen bg-gray-50">
-  <%= render 'meetings/session/header' %>
-  <%= render 'meetings/session/meeting_info' %>
-  
-  <!-- Main Content -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Container único para hero e conteúdo -->
+  <div class="max-w-7xl mx-auto">
+    <%= render 'meetings/session/header' %>
     
-    <!-- Single Column: Introduction, Agenda, Summary -->
-    <div class="space-y-6 mb-8">
-      <%= render 'meetings/session/introduction' %>
-      <%= render 'meetings/session/agenda' %>
-      <%= render 'meetings/session/summary' %>
-    </div>
-
-    <!-- Two Columns: Actions and Decisions -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-      <div class="h-full">
-        <%= render 'meetings/session/actions' %>
+    <!-- Main Content -->
+    <div class="px-4 sm:px-6 lg:px-8 py-12">
+      
+      <!-- Single Column: Introduction, Agenda, Summary -->
+      <div class="space-y-8 mb-12">
+        <%= render 'meetings/session/introduction' %>
+        <%= render 'meetings/session/agenda' %>
+        <%= render 'meetings/session/summary' %>
       </div>
-      <div class="h-full">
-        <%= render 'meetings/session/decisions' %>
-      </div>
-    </div>
 
-    <!-- Single Column: Closing -->
-    <div class="space-y-6">
-      <%= render 'meetings/session/closing' %>
+      <!-- Two Columns: Actions and Decisions -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div class="h-full">
+          <%= render 'meetings/session/actions' %>
+        </div>
+        <div class="h-full">
+          <%= render 'meetings/session/decisions' %>
+        </div>
+      </div>
+
+      <!-- Single Column: Closing -->
+      <div class="space-y-8">
+        <%= render 'meetings/session/closing' %>
+      </div>
     </div>
   </div>
 </div>

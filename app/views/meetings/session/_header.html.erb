@@ -1,33 +1,65 @@
-<!-- Header -->
-<div class="bg-white shadow-sm border-b border-gray-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex items-center">
-        <h1 class="text-2xl font-bold text-gray-900">Reunião em Andamento</h1>
-        <span class="ml-3 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-          <%= @meeting.status_display %>
-        </span>
-      </div>
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 shadow-2xl">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 bg-black/10">
+    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+  </div>
+  
+  <div class="relative px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center relative">
+      <!-- Main Title -->
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight">
+        <%= @meeting.title %>
+      </h1>
       
-      <div class="flex items-center space-x-3">
-        <%= link_to meeting_path(@meeting), 
-            class: "inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" do %>
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-          </svg>
-          Ver Ata
-        <% end %>
+      <!-- Meeting Details Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+        <!-- Date & Time -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div class="flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-200 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-white font-medium">
+              <%= @meeting.start_datetime.strftime("%d/%m/%Y às %H:%M") %>
+            </span>
+          </div>
+        </div>
         
-        <%= button_to complete_meeting_path(@meeting), method: :patch,
-            class: "inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
-            data: { confirm: "Tem certeza que deseja concluir esta reunião?" } do %>
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          Concluir Reunião
-        <% end %>
+        <!-- Location -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div class="flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-200 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span class="text-white font-medium">
+              <%= @meeting.location.present? ? @meeting.location : "Local não definido" %>
+            </span>
+          </div>
+        </div>
+        
+        <!-- Responsible -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div class="flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-200 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <span class="text-white font-medium">
+              <%= @meeting.creator.name %>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  
+  <!-- Bottom Wave -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg class="w-full h-12 text-gray-50" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
+    </svg>
   </div>
 </div>
