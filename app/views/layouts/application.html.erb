@@ -14,7 +14,6 @@
     <%#= tag.link rel="manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/logo.png" type="image/png">
-    <link rel="icon" href="/logo.png" type="image/png">
     <link rel="apple-touch-icon" href="/logo.png">
 
     <%# Includes Tailwind CSS %>
@@ -29,34 +28,39 @@
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
   </head>
 
-  <body class="bg-gray-50" data-controller="toast">
+  <body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen" data-controller="toast">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 bg-black/3 pointer-events-none">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
     <!-- Mobile menu overlay -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-40 lg:hidden hidden">
       <div class="fixed inset-0 bg-gray-600 bg-opacity-75" onclick="toggleMobileMenu()"></div>
     </div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
-             <!-- Logo -->
-       <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-         <div class="flex items-center">
-           <%= image_tag "logo.png", alt: "Documentou", class: "h-8 w-auto" %>
-           <span class="ml-2 text-xl font-bold text-gray-900">Documentou</span>
-         </div>
-         <!-- Close button for mobile -->
-                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
-             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-             </svg>
-           </button>
-       </div>
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white/90 backdrop-blur-sm shadow-lg border-r border-gray-200/30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+      <!-- Logo -->
+      <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200/30 bg-white/80 backdrop-blur-sm">
+        <div class="flex items-center">
+          <%= image_tag "logo.png", alt: "Documentou", class: "h-12 w-auto" %>
+          <span class="ml-2 text-xl font-bold text-gray-900">Documentou</span>
+        </div>
+        <!-- Close button for mobile -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
 
       <!-- Navigation -->
       <nav class="mt-6 px-3">
         <div class="space-y-1">
           <!-- Página Inicial -->
-          <a href="/" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <%= 'bg-blue-100 text-blue-700' if current_page?(root_path) %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless current_page?(root_path) %>">
-            <svg class="mr-3 h-5 w-5 <%= 'text-blue-500' if current_page?(root_path) %> <%= 'text-gray-400 group-hover:text-gray-500' unless current_page?(root_path) %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="/" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg <%= 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md' if current_page?(root_path) %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless current_page?(root_path) %>">
+            <svg class="mr-3 h-5 w-5 <%= 'text-white' if current_page?(root_path) %> <%= 'text-gray-400 group-hover:text-gray-500' unless current_page?(root_path) %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h2a2 2 0 012 2v6H8V5z"></path>
             </svg>
@@ -64,23 +68,23 @@
           </a>
 
           <!-- Meetings -->
-          <a href="<%= meetings_path %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <%= 'bg-blue-100 text-blue-700' if controller_name == 'meetings' %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless controller_name == 'meetings' %>">
-            <svg class="mr-3 h-5 w-5 <%= 'text-blue-500' if controller_name == 'meetings' %> <%= 'text-gray-400 group-hover:text-gray-500' unless controller_name == 'meetings' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="<%= meetings_path %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg <%= 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md' if controller_name == 'meetings' %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless controller_name == 'meetings' %>">
+            <svg class="mr-3 h-5 w-5 <%= 'text-white' if controller_name == 'meetings' %> <%= 'text-gray-400 group-hover:text-gray-500' unless controller_name == 'meetings' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             Reuniões
           </a>
 
           <!-- Tasks -->
-          <a href="<%= tasks_path %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <%= 'bg-blue-100 text-blue-700' if controller_name == 'tasks' %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless controller_name == 'tasks' %>">
-            <svg class="mr-3 h-5 w-5 <%= 'text-blue-500' if controller_name == 'tasks' %> <%= 'text-gray-400 group-hover:text-gray-500' unless controller_name == 'tasks' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="<%= tasks_path %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg <%= 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md' if controller_name == 'tasks' %> <%= 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' unless controller_name == 'tasks' %>">
+            <svg class="mr-3 h-5 w-5 <%= 'text-white' if controller_name == 'tasks' %> <%= 'text-gray-400 group-hover:text-gray-500' unless controller_name == 'tasks' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
             </svg>
             Tarefas
           </a>
 
           <!-- Users -->
-          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
             </svg>
@@ -88,7 +92,7 @@
           </a>
 
           <!-- Documents -->
-          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
@@ -96,7 +100,7 @@
           </a>
 
           <!-- Settings -->
-          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+          <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -111,13 +115,13 @@
             Ferramentas
           </div>
           <div class="mt-3 space-y-1">
-            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
               <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
               </svg>
               Relatórios
             </a>
-            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
               <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
@@ -131,29 +135,36 @@
     <!-- Main content -->
     <div class="lg:pl-64">
       <!-- Top bar -->
-      <div class="sticky top-0 z-30 bg-white shadow-sm border-b border-gray-200">
+      <div class="sticky top-0 z-30 bg-white/90 backdrop-blur-sm shadow-sm border-b border-gray-200/30">
         <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-          <!-- Mobile menu button -->
-          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
+          <!-- Mobile menu button and logo -->
+          <div class="flex items-center space-x-4">
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            
+            <!-- Logo for mobile -->
+            <div class="lg:hidden flex items-center">
+              <%= image_tag "logo.png", alt: "Documentou", class: "h-8 w-auto" %>
+              <span class="ml-2 text-lg font-bold text-gray-900">Documentou</span>
+            </div>
+          </div>
 
           <!-- Page title -->
           <div class="flex-1 min-w-0 lg:hidden">
             <h1 class="text-lg font-semibold text-gray-900 truncate">
-              <%= content_for(:page_title) || "Dashboard" %>
+              <%= content_for(:page_title) || "" %>
             </h1>
           </div>
 
           <!-- Right side -->
           <div class="flex items-center space-x-4">
-
             <!-- User menu -->
             <div class="relative">
-              <button onclick="toggleUserMenu()" class="flex items-center space-x-3 p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">
-                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+              <button onclick="toggleUserMenu()" class="flex items-center space-x-3 p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-md">
                   <span class="text-sm font-medium text-white">
                     <%= current_user&.email&.first&.upcase || "U" %>
                   </span>
@@ -165,12 +176,12 @@
               </button>
 
               <!-- User dropdown -->
-              <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configurações</a>
-                <div class="border-t border-gray-100"></div>
+              <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg py-1 z-50 border border-gray-200/30">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md mx-2">Perfil</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md mx-2">Configurações</a>
+                <div class="border-t border-gray-100 my-1"></div>
                 <%= button_to "Sair", destroy_user_session_path, method: :delete, 
-                    class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                    class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md mx-2" %>
               </div>
             </div>
           </div>

@@ -1,35 +1,36 @@
-<!-- Summary Section -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-  <div class="px-6 py-6 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-100">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center">
-        <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </div>
-        <label class="text-xl font-semibold text-gray-900">Resumo das Discussões</label>
+<!-- Summary Card -->
+<div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-gray-200/30 hover:shadow-lg transition-all duration-300">
+  <!-- Header -->
+  <div class="px-6 py-4 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-200/30 rounded-t-lg">
+    <div class="flex items-center">
+      <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center shadow-md">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
       </div>
-      <div data-quill-auto-save-target="status" class="text-sm text-green-600 font-medium bg-green-100 px-3 py-1 rounded-full">✅ Salvo</div>
+      <div class="ml-3">
+        <h3 class="text-lg font-semibold text-gray-900">Resumo</h3>
+        <p class="text-sm text-gray-600">Principais pontos e conclusões</p>
+      </div>
     </div>
   </div>
   
+  <!-- Content -->
   <div class="p-6">
-    <div data-controller="quill-auto-save" 
-         data-quill-auto-save-url-value="<%= update_content_meeting_path(@meeting) %>"
-         data-quill-auto-save-field-value="summary"
-         data-quill-auto-save-meeting-id-value="<%= @meeting.id %>"
-         data-quill-auto-save-debounce-ms-value="2000"
-         data-quill-auto-save-placeholder-value="Resumo das discussões, pontos importantes, argumentos apresentados..."
-         data-quill-auto-save-rows-value="30">
-      
-      <!-- Hidden input para o Rails -->
-      <input type="hidden" name="content[summary]" value="<%= html_escape(@content.summary.to_s) %>" data-quill-auto-save-target="input">
-      
-      <!-- Container do Quill -->
-      <div class="quill-container">
-        <div data-quill-auto-save-target="editor" class="quill-editor quill-editor--full"></div>
+    <% if @meeting.summary.present? %>
+      <div class="prose prose-gray max-w-none">
+        <%= @meeting.summary.html_safe %>
       </div>
-    </div>
+    <% else %>
+      <div class="text-center py-8">
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhum resumo definido</h3>
+        <p class="text-gray-500">Adicione um resumo para documentar os principais pontos da reunião.</p>
+      </div>
+    <% end %>
   </div>
 </div>
