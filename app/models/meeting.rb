@@ -8,6 +8,9 @@ class Meeting < ApplicationRecord
   accepts_nested_attributes_for :content
   accepts_nested_attributes_for :agendas, allow_destroy: true, reject_if: :all_blank
   
+  # Delegate content fields for easier access
+  delegate :introduction, :summary, :closing, to: :content, prefix: false, allow_nil: true
+  
   # Status da reunião
   enum :status, {
     scheduled: 'scheduled',      # Agendada
@@ -23,6 +26,11 @@ class Meeting < ApplicationRecord
   validates :end_datetime, presence: true
   validates :status, presence: true, inclusion: { in: statuses.keys }
   validate :end_datetime_after_start_datetime
+  
+  # Ensure content exists
+  def ensure_content!
+    self.content || self.build_content
+  end
   
   # Parsear datas no formato do Flatpickr
   def start_datetime=(value)

@@ -50,7 +50,6 @@ class MeetingsController < ApplicationController
       if @meeting.save
         # Criar content e agenda vazios automaticamente
         @meeting.create_content
-        @meeting.agendas.create(title: "Tópico 1", position: 1)
         
         format.html { redirect_to edit_meeting_path(@meeting, step: 'content'), notice: "Reunião criada! Agora vamos definir o conteúdo." }
         format.json { render :show, status: :created, location: @meeting }
@@ -99,12 +98,7 @@ class MeetingsController < ApplicationController
   end
 
   # GET /meetings/1/meeting_session
-  def meeting_session
-    # unless @meeting.in_progress?
-    #   redirect_to @meeting, alert: 'Esta reunião não está em andamento.'
-    #   return
-    # end
-    
+  def meeting_session 
     @content = @meeting.content || @meeting.build_content
     @agendas = @meeting.agendas.order(:position)
     @decisions = @meeting.decisions
@@ -122,10 +116,11 @@ class MeetingsController < ApplicationController
 
   # PATCH /meetings/1/update_content
   def update_content
-    if @meeting.content.update(content_params)
+    content = @meeting.content || @meeting.create_content
+    if content.update(content_params)
       render json: { success: true, message: 'Conteúdo atualizado com sucesso!' }
     else
-      render json: { success: false, message: @meeting.content.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      render json: { success: false, message: content.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 
