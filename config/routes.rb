@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
     
   resources :meetings do
-    resources :decisions, only: [:create]
+    resources :decisions, only: [:create, :update, :destroy]
     resources :agendas, only: [:update, :destroy] do
       member do
         patch :toggle_check
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks do
+  resources :tasks, only: [:create, :update, :destroy] do
     member do
       patch :update_status
     end

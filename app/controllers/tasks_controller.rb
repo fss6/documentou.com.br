@@ -36,12 +36,14 @@ class TasksController < ApplicationController
         format.html { redirect_to tasks_path, notice: 'Tarefa criada com sucesso!' }
         format.json { 
           render json: {
-            id: @task.id,
-            description: @task.description,
-            status: @task.status,
-            deadline: @task.deadline,
-            owner_name: @task.owner.name,
-            created_at: @task.created_at
+            task: {
+              id: @task.id,
+              description: @task.description,
+              status: @task.status,
+              deadline: @task.deadline,
+              owner_name: @task.owner.name,
+              created_at: @task.created_at
+            }
           }, status: :created 
         }
       end
@@ -59,17 +61,39 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: 'Tarefa atualizada com sucesso!'
+      respond_to do |format|
+        format.html { redirect_to tasks_path, notice: 'Tarefa atualizada com sucesso!' }
+        format.json { 
+          render json: {
+            task: {
+              id: @task.id,
+              description: @task.description,
+              status: @task.status,
+              deadline: @task.deadline,
+              owner_name: @task.owner.name,
+              created_at: @task.created_at
+            }
+          }
+        }
+      end
     else
-      @meetings = current_user.meetings
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html do
+          @meetings = current_user.meetings
+          render :edit, status: :unprocessable_entity
+        end
+        format.json { render json: { message: @task.errors.full_messages.join(', ') }, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: 'Tarefa excluída com sucesso!'
+    respond_to do |format|
+      format.html { redirect_to tasks_path, notice: 'Tarefa excluída com sucesso!' }
+      format.json { render json: { message: 'Tarefa excluída com sucesso!' } }
+    end
   end
 
   # PATCH /tasks/1/update_status
