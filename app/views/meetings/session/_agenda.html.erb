@@ -1,14 +1,14 @@
 <!-- Agenda Card -->
-<div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-gray-200/30 hover:shadow-lg transition-all duration-300">
+<div class="bg-white rounded-lg shadow-sm border border-gray-200">
   <!-- Header -->
-  <div class="px-6 py-4 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-gray-200/30 rounded-t-lg">
+  <div class="px-6 py-4 bg-green-50 border-b border-green-200 rounded-t-lg">
     <div class="flex items-center">
-      <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center shadow-md">
-        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
         </svg>
       </div>
-      <div class="ml-3">
+      <div>
         <h3 class="text-lg font-semibold text-gray-900">Pauta da Reunião</h3>
         <p class="text-sm text-gray-600">Tópicos e assuntos a serem discutidos</p>
       </div>
@@ -20,8 +20,8 @@
     <% if @meeting.agendas.any? %>
       <div class="space-y-4">
         <% @meeting.agendas.order(:position).each_with_index do |agenda, index| %>
-          <div class="flex items-center p-4 bg-gray-50/80 rounded-lg hover:bg-gray-100/80 transition-all duration-200">
-            <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mr-4">
+          <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
               <span class="text-sm font-semibold text-green-700"><%= index + 1 %></span>
             </div>
             <div class="flex-1 min-w-0">
@@ -36,7 +36,7 @@
             </div>
             <div class="flex-shrink-0 ml-4">
               <% if agenda.checked? %>
-                <div class="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                   <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
@@ -50,8 +50,8 @@
       </div>
     <% else %>
       <div class="text-center py-8">
-        <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
           </svg>
         </div>

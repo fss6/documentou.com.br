@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  description: MyText
-  status: MyString
+  description: "Aprovar o novo orçamento para o projeto Q4"
+  status: "approved"
+  meeting: one
 
 two:
-  description: MyText
-  status: MyString
+  description: "Revisar a política de trabalho remoto"
+  status: "pending"
+  meeting: one
+
+three:
+  description: "Contratar dois novos desenvolvedores para a equipe"
+  status: "approved"
+  meeting: two

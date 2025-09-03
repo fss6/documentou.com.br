@@ -1,56 +1,5 @@
 <div class="max-w-4xl mx-auto">
-  <!-- Header -->
-  <div class="mb-8">
-    <div class="flex justify-between items-start">
-      <div>
-        <nav class="flex" aria-label="Breadcrumb">
-          <ol class="flex items-center space-x-4">
-            <li>
-              <%= link_to root_path, class: "text-gray-500 hover:text-gray-700" do %>
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-              <% end %>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <%= link_to "Reuniões", meetings_path, class: "ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" %>
-              </div>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-4 text-sm font-medium text-gray-500">Ata de Reunião</span>
-              </div>
-            </li>
-          </ol>
-        </nav>
-      </div>
-      <div class="flex space-x-3">
-        <%= link_to edit_meeting_path(@meeting), 
-            class: "inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" do %>
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-          </svg>
-          Editar
-        <% end %>
-        <%= button_to meeting_path(@meeting), 
-            method: :delete,
-            class: "inline-flex items-center px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2",
-            data: { confirm: "Tem certeza que deseja excluir esta reunião?" } do %>
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-          </svg>
-          Excluir
-        <% end %>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Notice Message -->
   <% if notice %>
@@ -73,55 +22,42 @@
     
     <!-- Cabeçalho da Ata -->
     <div class="px-8 py-6 border-b-2 border-gray-300 bg-gray-50">
-      <div class="text-center">
-        <h1 class="text-2xl font-bold text-gray-900 mb-2">ATA DE REUNIÃO</h1>
-                        <h2 class="text-xl font-semibold text-gray-900"><%= @meeting.title %></h2>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <%= link_to meetings_path, class: "inline-flex items-center p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span class="ml-2 text-sm font-medium">Voltar</span>
+          <% end %>
+        </div>
+        <div class="flex-1 text-center">
+          <h2 class="text-xl font-semibold text-gray-900"><%= @meeting.title %></h2>
+        </div>
+        <div class="w-24"></div>
       </div>
     </div>
 
                <!-- Informações da Reunião -->
            <div class="px-8 py-6 border-b border-gray-200">
-             <!-- Status e Ações -->
-             <div class="mb-6">
-               <div class="flex items-center justify-between">
-                 <div class="flex items-center space-x-3">
-                   <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-                     <%= case @meeting.status
-                         when 'scheduled' then 'bg-yellow-100 text-yellow-800'
-                         when 'in_progress' then 'bg-blue-100 text-blue-800'
-                         when 'completed' then 'bg-green-100 text-green-800'
-                         end %>">
-                     <%= @meeting.status_display %>
-                   </span>
-                 </div>
-                 <div class="flex space-x-3">
-                   <% if @meeting.can_start? %>
-                     <%= button_to start_meeting_path(@meeting), method: :patch, 
-                         class: "inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" do %>
-                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                       </svg>
-                       Iniciar Reunião
-                     <% end %>
-                   <% end %>
-                   
-                   <% if @meeting.can_complete? %>
-                     <%= button_to complete_meeting_path(@meeting), method: :patch,
-                         class: "inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" do %>
-                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                       </svg>
-                       Concluir Reunião
-                     <% end %>
-                   <% end %>
-                 </div>
-               </div>
-             </div>
+
              
              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                <div>
                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações Gerais</h3>
           <dl class="space-y-3">
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Status</dt>
+              <dd class="mt-1 text-sm text-gray-900">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <%= @meeting.status_display %>
+                </div>
+              </dd>
+            </div>
+            
             <% if @meeting.start_datetime.present? %>
               <div>
                 <dt class="text-sm font-medium text-gray-500">Data e Hora de Início</dt>
@@ -215,38 +151,27 @@
     </div>
 
     <!-- Conteúdo da Reunião -->
-    <% if @meeting.content.present? %>
+    <% if @meeting.content.present? && @meeting.content.introduction.present? %>
       <div class="px-8 py-6 border-b border-gray-200">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Desenvolvimento</h3>
         
-        <% if @meeting.content.introduction.present? %>
-          <div class="mb-6">
-            <h4 class="text-md font-medium text-gray-900 mb-2">Introdução</h4>
-            <div class="prose prose-sm max-w-none">
-              <%= @meeting.content.introduction.html_safe %>
-            </div>
-          </div>
-        <% end %>
-        
-        <% if @meeting.content.summary.present? %>
-          <div class="mb-6">
-            <h4 class="text-md font-medium text-gray-900 mb-2">Discussões e Decisões</h4>
-            <div class="prose prose-sm max-w-none">
-              <%= @meeting.content.summary.html_safe %>
-            </div>
-          </div>
-        <% end %>
-        
-        <% if @meeting.content.closing.present? %>
-          <div>
-            <h4 class="text-md font-medium text-gray-900 mb-2">Encerramento</h4>
-            <div class="prose prose-sm max-w-none">
-              <%= @meeting.content.closing.html_safe %>
-            </div>
-          </div>
-        <% end %>
+        <div class="prose prose-sm max-w-none">
+          <%= @meeting.content.introduction.html_safe %>
+        </div>
       </div>
     <% end %>
+
+    <!-- Resumo da Reunião -->
+    <div class="px-8 py-6 border-b border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">Resumo</h3>
+      <% if @meeting.content.present? && @meeting.content.summary.present? %>
+        <div class="prose prose-sm max-w-none">
+          <%= @meeting.content.summary.html_safe %>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-500 italic">Nenhum resumo foi registrado para esta reunião.</p>
+      <% end %>
+    </div>
 
     <!-- Ações Definidas -->
     <div class="px-8 py-6 border-b border-gray-200">
@@ -284,6 +209,59 @@
       <% end %>
     </div>
 
+    <!-- Decisões Tomadas -->
+    <div class="px-8 py-6 border-b border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">Decisões Tomadas</h3>
+      <% decisions = @meeting.decisions %>
+      <% if decisions.any? %>
+        <div class="space-y-4">
+          <% decisions.each do |decision| %>
+            <div class="flex items-start p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div class="flex-shrink-0 mr-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                  <%= case decision.status
+                      when 'pending' then 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+                      when 'approved' then 'bg-green-100 text-green-800 border border-green-200'
+                      when 'rejected' then 'bg-red-100 text-red-800 border border-red-200'
+                      end %>">
+                  <%= decision.status_display %>
+                </span>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <p class="text-sm text-gray-900 leading-relaxed font-medium">
+                      <%= decision.description %>
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-3 flex items-center text-xs text-gray-500">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span>Decidido em: <%= decision.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-500 italic">Nenhuma decisão foi tomada nesta reunião.</p>
+      <% end %>
+    </div>
+
+    <!-- Encerramento da Reunião -->
+    <div class="px-8 py-6 border-b border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">Encerramento</h3>
+      <% if @meeting.content.present? && @meeting.content.closing.present? %>
+        <div class="prose prose-sm max-w-none">
+          <%= @meeting.content.closing.html_safe %>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-500 italic">Nenhum encerramento foi registrado para esta reunião.</p>
+      <% end %>
+    </div>
+
     <!-- Rodapé da Ata -->
     <div class="px-8 py-6 bg-gray-50">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -298,4 +276,108 @@
       </div>
     </div>
   </div>
+
+  <!-- Botão de Deletar Reunião -->
+  <div class="mt-8 flex justify-center">
+    <button type="button" 
+            class="inline-flex items-center px-6 py-3 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 shadow-sm"
+            onclick="showDeleteModal()">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+      </svg>
+      Excluir Reunião
+    </button>
+  </div>
 </div>
+
+<!-- Modal de Confirmação para Exclusão da Reunião -->
+<div class="hidden fixed inset-0 modal-backdrop overflow-y-auto h-full w-full z-50" 
+     id="delete-meeting-modal">
+  
+  <!-- Modal Container -->
+  <div class="relative top-20 mx-auto p-0 w-full max-w-md transform transition-all duration-300">
+    
+    <!-- Modal Content -->
+    <div class="bg-white rounded-xl shadow-2xl border-0 overflow-hidden">
+      
+      <!-- Header -->
+      <div class="px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-900">Confirmar Exclusão</h3>
+          <button type="button" 
+                  class="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  onclick="closeDeleteModal()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Content -->
+      <div class="px-6 py-6">
+        
+        <div class="flex items-center mb-4">
+          <div class="flex-shrink-0">
+            <svg class="w-12 h-12 text-red-100 bg-red-600 rounded-full p-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h4 class="text-lg font-medium text-gray-900">Atenção!</h4>
+            <p class="text-sm text-gray-500">Esta ação não pode ser desfeita.</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-6">
+          Tem certeza que deseja excluir a reunião "<strong><%= @meeting.title %></strong>"? 
+          Esta ação removerá permanentemente a reunião e todos os dados associados (pauta, conteúdo, ações e decisões).
+        </p>
+        
+        <!-- Footer -->
+        <div class="flex items-center justify-end space-x-3 pt-6 border-t border-gray-200">
+          <button type="button" 
+                  class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                  onclick="closeDeleteModal()">
+            Cancelar
+          </button>
+          <%= button_to meeting_path(@meeting), 
+              method: :delete,
+              class: "px-6 py-2.5 text-sm font-medium text-white bg-red-600 border border-transparent rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 shadow-sm" do %>
+            Excluir Reunião
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showDeleteModal() {
+    const modal = document.getElementById('delete-meeting-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeDeleteModal() {
+    const modal = document.getElementById('delete-meeting-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  // Fechar modal ao clicar no backdrop
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('delete-meeting-modal');
+    if (modal) {
+      modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          closeDeleteModal();
+        }
+      });
+    }
+  });
+</script>
