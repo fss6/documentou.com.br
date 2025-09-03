@@ -1,32 +1,84 @@
-<div class="min-h-screen bg-gray-50">
-  <!-- Container único para hero e conteúdo -->
-  <div class="max-w-7xl mx-auto">
-    <%= render 'meetings/session/header' %>
+<div class="max-w-4xl mx-auto">
+  <!-- Header -->
+  <%= render 'meetings/session/header' %>
+  
+  <!-- Main Content -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
     
-    <!-- Main Content -->
-    <div class="px-4 sm:px-6 lg:px-8 py-12">
-      
-      <!-- Single Column: Introduction, Agenda, Summary -->
-      <div class="space-y-8 mb-12">
-        <%= render 'meetings/session/introduction' %>
-        <%= render 'meetings/session/agenda' %>
-        <%= render 'meetings/session/summary' %>
-      </div>
-
-      <!-- Two Columns: Actions and Decisions -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        <div class="h-full">
-          <%= render 'meetings/session/actions' %>
+    <!-- Informações da Reunião -->
+    <div class="px-8 py-6 border-b border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações Gerais</h3>
+          <dl class="space-y-3">
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Status</dt>
+              <dd class="mt-1 text-sm text-gray-900">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <%= @meeting.status_display %>
+                </div>
+              </dd>
+            </div>
+            
+            <% if @meeting.start_datetime.present? %>
+              <div>
+                <dt class="text-sm font-medium text-gray-500">Data e Hora de Início</dt>
+                <dd class="mt-1 text-sm text-gray-900">
+                  <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <%= @meeting.start_datetime.strftime("%d/%m/%Y às %H:%M") %>
+                  </div>
+                </dd>
+              </div>
+            <% end %>
+            
+            <% if @meeting.location.present? %>
+              <div>
+                <dt class="text-sm font-medium text-gray-500">Local</dt>
+                <dd class="mt-1 text-sm text-gray-900">
+                  <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <%= @meeting.location %>
+                  </div>
+                </dd>
+              </div>
+            <% end %>
+          </dl>
         </div>
-        <div class="h-full">
-          <%= render 'meetings/session/decisions' %>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Participantes</h3>
+          <div class="text-sm text-gray-600">
+            <p>Reunião criada por: <strong><%= @meeting.creator.name %></strong></p>
+            <p class="mt-2">Participantes: A definir</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Single Column: Closing -->
-      <div class="space-y-8">
-        <%= render 'meetings/session/closing' %>
-      </div>
+    <!-- Single Column: Introduction, Agenda, Summary -->
+    <div class="space-y-0">
+      <%= render 'meetings/session/introduction' %>
+      <%= render 'meetings/session/agenda' %>
+      <%= render 'meetings/session/summary' %>
+    </div>
+
+    <!-- Ações Definidas -->
+    <%= render 'meetings/session/actions' %>
+
+    <!-- Decisões Tomadas -->
+    <%= render 'meetings/session/decisions' %>
+
+    <!-- Single Column: Closing -->
+    <div>
+      <%= render 'meetings/session/closing' %>
     </div>
   </div>
 </div>

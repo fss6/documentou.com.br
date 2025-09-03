@@ -1,27 +1,24 @@
-<!-- Summary Section -->
-<div class="mb-8">
-  <!-- Header -->
-  <div class="mb-4">
-    <h3 class="text-xl font-semibold text-gray-900 mb-2">Resumo</h3>
-    <p class="text-sm text-gray-600">Principais pontos discutidos</p>
+<!-- Resumo da Reunião -->
+<div class="px-8 py-6 border-b border-gray-200">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold text-gray-900">Resumo</h3>
+    <div data-quill-auto-save-target="status" class="text-sm text-green-600 font-medium bg-green-100 px-3 py-1 rounded-full">✅ Salvo</div>
   </div>
   
-  <!-- Content -->
-  <div>
-    <% if @meeting.summary.present? %>
-      <div class="prose prose-gray max-w-none">
-        <%= @meeting.summary.html_safe %>
-      </div>
-    <% else %>
-      <div class="text-center py-8 bg-gray-50 rounded-lg">
-        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhum resumo definido</h3>
-        <p class="text-gray-500">Adicione um resumo dos principais pontos discutidos.</p>
-      </div>
-    <% end %>
+  <div data-controller="quill-auto-save" 
+       data-quill-auto-save-url-value="<%= update_content_meeting_path(@meeting) %>"
+       data-quill-auto-save-field-value="summary"
+       data-quill-auto-save-meeting-id-value="<%= @meeting.id %>"
+       data-quill-auto-save-debounce-ms-value="2000"
+       data-quill-auto-save-placeholder-value="Principais pontos discutidos, decisões tomadas, resumo da reunião..."
+       data-quill-auto-save-rows-value="20">
+    
+    <!-- Hidden input para o Rails -->
+    <input type="hidden" name="content[summary]" value="<%= html_escape(@content.summary.to_s) %>" data-quill-auto-save-target="input">
+    
+    <!-- Container do Quill -->
+    <div class="quill-container">
+      <div data-quill-auto-save-target="editor" class="quill-editor quill-editor--full"></div>
+    </div>
   </div>
 </div>
